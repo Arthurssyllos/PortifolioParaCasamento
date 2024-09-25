@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camilly & Arthur - Save the Date</title>
-  <link rel="icon" href="favicon.png" type="image/png"> <!-- Adicionando o favicon -->
+  <link rel="icon" href="favicon.png" type="image/png">
   <style>
     body, html {
       margin: 0;
@@ -18,8 +18,8 @@
       position: relative;
       width: 100%;
       height: 100vh;
-      background-image: url('WhatsApp Image 2024-09-17 at 19.30.54.jpeg'); /* Imagem de fundo */
-      background-size: cover; /* Preenche toda a tela */
+      background-image: url('WhatsApp Image 2024-09-17 at 19.30.54.jpeg');
+      background-size: cover;
       background-position: center;
       background-attachment: fixed;
       background-repeat: no-repeat;
@@ -36,14 +36,14 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.4); /* Camada escura com transparência */
-      filter: brightness(0.9) contrast(1.1); /* Filtro de brilho e contraste */
+      background-color: rgba(0, 0, 0, 0.4);
+      filter: brightness(0.9) contrast(1.1);
       z-index: 1;
     }
 
     header div {
       position: relative;
-      z-index: 2; /* Garante que o texto fique acima da camada escura */
+      z-index: 2;
       color: white;
     }
 
@@ -94,6 +94,76 @@
       margin-top: 20px;
     }
 
+    /* Menu Hamburguer */
+    .menu-icon {
+      display: none;
+      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 4;
+    }
+
+    .menu-icon div {
+      width: 35px;
+      height: 4px;
+      background-color: white;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+
+    /* Menu Responsivo */
+    .menu-responsive {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transform: translateX(100%);
+      opacity: 0;
+      transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+      z-index: 3;
+    }
+
+    .menu-responsive a {
+      text-decoration: none;
+      color: white;
+      font-size: 2rem;
+      margin: 20px 0;
+      padding: 10px;
+    }
+
+    .menu-responsive a:hover {
+      background: white;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    .menu-responsive.open {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* Botão de Fechar */
+    .menu-responsive .close-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 2rem;
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 5;
+    }
+
     /* Estilo para o botão adaptado */
     .presence-button {
       padding: 10px 20px;
@@ -108,34 +178,31 @@
       border: 1px solid #ffffff80;
       transition: background 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
       user-select: none;
-      position: relative; /* Para permitir a posição relativa do pseudo-elemento */
-      margin-top: 40px; /* Aumentar a margem superior para afastar o botão */
+      position: relative;
+      margin-top: 40px;
     }
 
     .presence-button:hover,
     .presence-button:focus {
-      color: #ffffff; /* Cor de texto mais clara */
-      background: #00ff00; /* Cor de fundo verde no hover */
-      border: 1px solid #00ff00; /* Cor da borda verde no hover */
+      color: #ffffff;
+      background: #00ff00;
+      border: 1px solid #00ff00;
       text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-      box-shadow: 0 0 5px #00ff00, 0 0 20px #00ff00, 0 0 50px #00ff00,
-        0 0 100px #00ff00; /* Efeito neon verde */
+      box-shadow: 0 0 5px #00ff00, 0 0 20px #00ff00, 0 0 50px #00ff00, 0 0 100px #00ff00;
     }
 
     /* Responsividade */
     @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .menu-icon {
+        display: block;
+      }
+
       header h1 {
         font-size: 3rem;
-      }
-
-      nav {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      nav a {
-        font-size: 1rem;
-        padding: 8px 16px;
       }
 
       .presence-button {
@@ -157,33 +224,58 @@
         font-size: 0.9rem;
         padding: 8px 16px;
       }
-
-      nav a {
-        font-size: 0.9rem;
-        padding: 6px 12px;
-      }
     }
   </style>
 </head>
 <body>
 
 <header>
+  <div class="menu-icon" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  
   <nav>
     <a href="#confirmar">Confirmar Presença</a>
-    <a href="#lista">Lista de Presentes</a>
+    <a href="lista-presenca.html">Lista de Presentes</a> <!-- Link atualizado -->
     <a href="#evento">O Evento</a>
     <a href="#historia">História do Casal</a>
     <a href="#ajuda">Ajuda</a>
   </nav>
   
+  <div class="menu-responsive" id="menuResponsive">
+    <a href="#confirmar">Confirmar Presença</a>
+    <a href="listaPresentes.html">Lista de Presentes</a> <!-- Link atualizado -->
+    <a href="#evento">O Evento</a>
+    <a href="#historia">História do Casal</a>
+    <a href="#ajuda">Ajuda</a>
+    <button class="close-btn" onclick="toggleMenu()">X</button>
+  </div>
+
   <div>
     <div class="save-the-date">Save the date</div>
     <h1>Camilly & Arthur</h1>
     <p>08.06.2025</p>
     <p class="quote">"Para que todos vejam e saibam, considerem e juntamente entendam que a mão do Senhor o fez." - Isaías 41:20</p>
-    <button class="presence-button">Presença</button> <!-- Botão adaptado -->
+    <button class="presence-button">Presença</button>
   </div>
 </header>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('menuResponsive');
+    menu.classList.toggle('open');
+  }
+
+  // Fecha o menu ao clicar fora dele
+  window.onclick = function(event) {
+    const menu = document.getElementById('menuResponsive');
+    if (!event.target.closest('.menu-icon') && !event.target.closest('#menuResponsive')) {
+      menu.classList.remove('open');
+    }
+  }
+</script>
 
 </body>
 </html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Evento - Camilly & Arthur</title>
+    <link rel="icon" href="favicon3.png" type="image/png">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('fazendaBoaEsperanca.jpeg'); /* Caminho da imagem da fazenda */
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita a repetição da imagem */
+            text-align: center;
+            color: #fff; /* Cor do texto */
+            margin: 0; /* Remove margens padrão do body */
+            height: 100vh; /* Garante que o body tenha 100% da altura da viewport */
+            display: flex; /* Usando flexbox para centralizar conteúdo */
+            flex-direction: column; /* Orientação vertical */
+            justify-content: center; /* Centraliza verticalmente */
+            align-items: center; /* Centraliza horizontalmente */
+            overflow: hidden; /* Remove a rolagem */
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para destacar o texto */
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .evento-info {
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente para destaque */
+            padding: 20px;
+            border-radius: 10px; /* Cantos arredondados */
+            display: inline-block; /* Para centralizar o bloco */
+            margin-top: 30px;
+        }
+
+        .localizacao {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem; /* Tamanho menor em telas pequenas */
+            }
+
+            p {
+                font-size: 1.2rem; /* Tamanho menor para o texto da mensagem */
+            }
+
+            .evento-info {
+                padding: 15px; /* Menos padding em telas pequenas */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>O Evento</h1>
+    <div class="evento-info">
+        <p><strong>Data:</strong> 08 de Junho de 2025</p>
+        <p><strong>Horário:</strong> 16:00</p>
+        <p><strong>Local:</strong> Fazenda Boa Esperança</p>
+        <div class="localizacao">
+            <span>📍</span>
+            <a href="https://www.google.com/maps/dir//Estr.+Mun.+Itapecirica,+6755+-+Itapecerica,+Taubat%C3%A9+-+SP,+12086-020/@-23.0816641,-45.6110798,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94ccfec464897283:0x6daf6dc897d3e998!2m2!1d-45.5286782!2d-23.0816855?entry=ttu&g_ep=EgoyMDI0MDkyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="color: #fff; text-decoration: underline;">Ver no Google Maps</a>
+        </div>
+    </div>
+
+</body>
+</html>

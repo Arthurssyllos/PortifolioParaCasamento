@@ -4,99 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Presentes - Camilly & Arthur</title>
-    <link rel="icon" href="favicon1.png" type="image/png"> <!-- Adicione esta linha -->
+    <link rel="icon" href="favicon3.png" type="image/png">
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #4A7C50; /* Verde escuro mais suave */
-            text-align: center;
-            padding: 20px;
-            margin: 0; /* Remove margens padrão do body */
+            background-image: url('ListaPresentes.jpeg'); /* Caminho da imagem de fundo */
+            background-size: contain; /* Faz a imagem cobrir o conteúdo */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita a repetição da imagem */
+            margin: 0;
+            height: 100vh;
+            position: relative; /* Necessário para usar posicionamento absoluto */
         }
 
-        h1 {
-            color: #fff; /* Cor do título */
-            font-size: 2.5rem; /* Tamanho da fonte para o título */
+        /* Estilo do QR Code */
+        .qrcode {
+            position: fixed;
+            top: 70%; /* Ajustado para descer o QR Code */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 170px;
+            height: 170px;
         }
 
-        p {
-            margin: 20px 0;
-            font-size: 1.2rem;
-            color: #e0e0e0; /* Cor do texto da mensagem */
-            font-style: italic; /* Texto em itálico */
-            transition: color 0.5s ease; /* Animação na cor do texto */
+        /* Estilo do botão */
+        .botao {
+            position: absolute;
+            top: 50%; /* Mantido para o botão */
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        a {
+        .botao a {
             display: inline-block;
-            margin: 20px 0;
-            padding: 10px 20px;
-            background: transparent; /* Fundo transparente */
-            color: #ffffff80; /* Cor do texto do botão */
-            border: 1px solid #ffffff80; /* Borda com a mesma cor */
-            border-radius: 8px;
-            text-transform: uppercase;
-            font-size: 17px;
-            font-weight: 500;
-            text-decoration: none; /* Remove o sublinhado */
-            transition: background 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
-            user-select: none;
+            padding: 16px 21px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #C8A165;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        a:hover,
-        a:focus {
-            color: #ffffff; /* Cor do texto ao passar o mouse */
-            background: #00ff00; /* Cor de fundo ao passar o mouse */
-            border: 1px solid #00ff00; /* Borda ao passar o mouse */
-            box-shadow: 0 0 5px #00ff00, 0 0 20px #00ff00, 0 0 50px #00ff00; /* Efeito de brilho */
-            animation: pulse 0.6s infinite; /* Animação de pulsação */
+        .botao a:hover {
+            background-color: #b38d4c;
+            transform: translateY(-3px);
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05); /* Aumenta ligeiramente o tamanho */
-            }
-            100% {
-                transform: scale(1);
+        .botao a:active {
+            transform: translateY(1px);
+        }
+
+        /* Ajustes para telas maiores */
+        @media (min-width: 768px) {
+            body {
+                background-size: cover;
             }
         }
 
-        img {
-            margin-top: 30px; /* Margem acima da imagem do QR Code */
-            max-width: 100%; /* Ajuste o tamanho máximo da imagem para 100% */
-            height: auto; /* Mantém a proporção da imagem */
-            max-height: 200px; /* Altura máxima da imagem */
-            display: block; /* Faz a imagem ocupar toda a largura disponível */
-            margin-left: auto; /* Centraliza a imagem */
-            margin-right: auto; /* Centraliza a imagem */
+        @media (min-width: 1200px) {
+            body {
+                background-size: contain;
+            }
         }
 
-        /* Estilos responsivos */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem; /* Tamanho menor em telas pequenas */
+        /* Ajustes para dispositivos móveis */
+        @media (max-width: 767px) {
+            body {
+                background-size: cover; /* Volta para o comportamento anterior no celular */
             }
 
-            p {
-                font-size: 1rem; /* Tamanho menor para o texto da mensagem */
+            /* Ajustar QR Code e Botão para telas pequenas */
+            .qrcode {
+                width: 150px;
+                height: 150px;
+                top: 70%; /* Ajustado para descer o QR Code em dispositivos móveis */
             }
 
-            a {
-                font-size: 15px; /* Tamanho menor do botão */
+            .botao {
+                top: 50%; /* Mantido para o botão */
+            }
+
+            .botao a {
+                font-size: 1rem; /* Ajusta o tamanho da fonte do botão para telas menores */
+                padding: 12px 18px; /* Menor padding no botão em dispositivos móveis */
             }
         }
     </style>
 </head>
 <body>
 
-    <h1>Lista de Presentes</h1>
-    <p>Queridos convidados, a alegria de tê-los conosco é a verdadeira celebração. Se desejarem, aqui está a lista de presentes, cuidadosamente elaborada para compartilhar este momento especial.</p>
-    <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/772958" target="_blank">Acesse a Lista de Presentes</a>
+    <!-- QR Code centralizado dentro do quadrado -->
+    <img src="qrcode_lista_presente.png" alt="QR Code" class="qrcode">
     
-    <img src="qrcode_lista_presente.png" alt="QR Code da Lista de Presentes"> <!-- Substitua pelo caminho da imagem do QR Code -->
+    <!-- Botão para acessar a lista de presentes -->
+    <div class="botao">
+        <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/772958" target="_blank">Ir até a Lista de Presentes</a>
+    </div>
 
 </body>
 </html>

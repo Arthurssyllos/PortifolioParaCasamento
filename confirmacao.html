@@ -4,97 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmação de Presença - Camilly & Arthur</title>
-    <link rel="icon" href="favicon2.png" type="image/png"> <!-- Adicione esta linha -->
+    <link rel="icon" href="favicon3.png" type="image/png">
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #4A7C50; /* Verde escuro mais suave */
-            text-align: center;
-            padding: 20px;
-            margin: 0; /* Remove margens padrão do body */
+            background-image: url('Presenca.jpeg'); /* Caminho da imagem enviada */
+            background-size: contain; /* Responsivo e impede cortes */
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            height: 100vh;
+            position: relative;
         }
 
-        h1 {
-            color: #fff; /* Cor do título */
-            font-size: 2.5rem; /* Tamanho da fonte para o título */
+        /* Botão fixo */
+        .botao {
+            position: fixed;
+            left: 50%;
+            transform: translate(-50%, 0);
         }
 
-        p {
-            margin: 20px 0;
-            font-size: 1.2rem;
-            color: #e0e0e0; /* Cor do texto da mensagem */
-            font-style: italic; /* Texto em itálico */
-            transition: color 0.5s ease; /* Animação na cor do texto */
-        }
-
-        a {
+        .botao a {
             display: inline-block;
-            margin: 20px 0;
-            padding: 10px 20px;
-            background: transparent; /* Fundo transparente */
-            color: #ffffff80; /* Cor do texto do botão */
-            border: 1px solid #ffffff80; /* Borda com a mesma cor */
-            border-radius: 8px;
-            text-transform: uppercase;
-            font-size: 17px;
-            font-weight: 500;
-            text-decoration: none; /* Remove o sublinhado */
-            transition: background 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
-            user-select: none;
+            padding: 20px 110px; /* Largura do botão no desktop */
+            font-size: 1.3rem; /* Tamanho da fonte no desktop */
+            color: #fff;
+            background-color: #C8A165;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        a:hover,
-        a:focus {
-            color: #ffffff; /* Cor do texto ao passar o mouse */
-            background: #00ff00; /* Cor de fundo ao passar o mouse */
-            border: 1px solid #00ff00; /* Borda ao passar o mouse */
-            box-shadow: 0 0 5px #00ff00, 0 0 20px #00ff00, 0 0 50px #00ff00; /* Efeito de brilho */
-            animation: pulse 0.6s infinite; /* Animação de pulsação */
+        .botao a:hover {
+            background-color: #b38d4c;
+            transform: translateY(-3px);
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
+        .botao a:active {
+            transform: translateY(1px);
+        }
+
+        /* Ajustes para telas maiores (PC) */
+        @media (min-width: 768px) {
+            body {
+                background-size: cover;
             }
-            50% {
-                transform: scale(1.05); /* Aumenta ligeiramente o tamanho */
-            }
-            100% {
-                transform: scale(1);
+
+            .botao {
+                bottom: 20%; /* Ajuste fino para o botão no desktop */
             }
         }
 
-        img {
-            margin-top: 30px; /* Margem acima da imagem do QR Code */
-            max-width: 100%; /* Ajuste o tamanho máximo da imagem para 100% */
-            height: auto; /* Mantém a proporção da imagem */
-            max-height: 200px; /* Altura máxima da imagem */
-            display: block; /* Faz a imagem ocupar toda a largura disponível */
-            margin-left: auto; /* Centraliza a imagem */
-            margin-right: auto; /* Centraliza a imagem */
-        }
-
-        /* Estilos responsivos */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem; /* Tamanho menor em telas pequenas */
+        /* Ajustes para dispositivos móveis */
+        @media (max-width: 767px) {
+            body {
+                background-size: cover;
             }
 
-            p {
-                font-size: 1rem; /* Tamanho menor para o texto da mensagem */
+            .botao {
+                bottom: 29.7%; /* Ajuste do botão em telas menores, minimamente para baixo */
             }
 
-            a {
-                font-size: 15px; /* Tamanho menor do botão */
+            .botao a {
+                font-size: 1.1rem; /* Aumenta um pouco o tamanho da fonte no botão em dispositivos móveis */
+                padding: 14px 51px; /* Aumenta a largura do botão em dispositivos móveis */
             }
         }
     </style>
 </head>
 <body>
 
-    <h1>Confirmação de Presença</h1>
-    <p>"Sua presença é o melhor presente que poderíamos receber. Vamos celebrar juntos este momento inesquecível!"</p>
-    <a href="https://api.whatsapp.com/send?phone=5512992264185&text=Olá,%20tudo%20bem?%20Sou%20convidado%20da%20celebração%20entre%20o%20casamento%20de%20Camilly%20%26%20Arthur,%20estou%20confirmando%20minha%20presença%20por%20aqui,%20obrigado!" target="_blank">Confirmar Presença</a>
+    <!-- Botão para confirmar presença -->
+    <div class="botao">
+        <a href="https://wa.me/5512992264185?text=Olá%2C%20tudo%20bem%3F%20Sou%20convidado%20da%20celebração%20entre%20o%20casamento%20de%20Camilly%20%26%20Arthur%2C%20estou%20confirmando%20minha%20presença%20por%20aqui%2C%20obrigado!" target="_blank">Confirmar Presença</a>
+    </div>
 
 </body>
 </html>

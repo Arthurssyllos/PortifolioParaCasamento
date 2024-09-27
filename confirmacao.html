@@ -15,6 +15,7 @@
             margin: 0;
             height: 100vh;
             position: relative;
+            overflow: hidden; /* Impede rolagem */
         }
 
         /* Botão fixo */
@@ -22,12 +23,13 @@
             position: fixed;
             left: 50%;
             transform: translate(-50%, 0);
+            bottom: 40%; /* Ajuste do botão para ficar mais alto */
         }
 
         .botao a {
             display: inline-block;
-            padding: 20px 110px; /* Largura do botão no desktop */
-            font-size: 1.3rem; /* Tamanho da fonte no desktop */
+            padding: 15px 80px; /* Largura e altura do botão */
+            font-size: 1.2rem; /* Tamanho da fonte no mobile */
             color: #fff;
             background-color: #C8A165;
             border-radius: 12px;
@@ -59,17 +61,13 @@
 
         /* Ajustes para dispositivos móveis */
         @media (max-width: 767px) {
-            body {
-                background-size: cover;
-            }
-
             .botao {
-                bottom: 29.7%; /* Ajuste do botão em telas menores, minimamente para baixo */
+                bottom: 40%; /* Mantém o botão mais alto em dispositivos móveis */
             }
 
             .botao a {
                 font-size: 1.1rem; /* Aumenta um pouco o tamanho da fonte no botão em dispositivos móveis */
-                padding: 14px 51px; /* Aumenta a largura do botão em dispositivos móveis */
+                padding: 12px 70px; /* Ajuste de largura e altura do botão em dispositivos móveis */
             }
         }
     </style>

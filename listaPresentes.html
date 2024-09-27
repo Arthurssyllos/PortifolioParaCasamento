@@ -63,6 +63,11 @@
             body {
                 background-size: cover;
             }
+
+            /* Ajustar o QR Code para telas maiores */
+            .qrcode {
+                top: 70%; /* QR Code um pouco mais para baixo no PC */
+            }
         }
 
         @media (min-width: 1200px) {
@@ -81,12 +86,12 @@
             .qrcode {
                 width: 150px;
                 height: 150px;
-                top: 75%; /* Mantido para descer o QR Code em dispositivos móveis */
+                top: 80%; /* Ajustado para descer o QR Code um pouco mais em dispositivos móveis */
             }
 
             /* Ajuste específico para o botão no mobile */
             .botao {
-                top: 65%; /* Botão mais para baixo */
+                top: 55%; /* Botão mais para cima no mobile */
             }
 
             .botao a {

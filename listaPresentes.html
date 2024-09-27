@@ -20,8 +20,8 @@
 
         /* Estilo do QR Code */
         .qrcode {
-            position: fixed; /* Mudado para fixed */
-            top: 70%; /* Ajustado para descer o QR Code */
+            position: fixed; /* Mantém a posição fixa */
+            top: 75%; /* Ajustado para descer o QR Code */
             left: 50%;
             transform: translate(-50%, -50%);
             width: 170px;
@@ -31,9 +31,9 @@
         /* Estilo do botão */
         .botao {
             position: fixed; /* Mantém a posição fixa */
-            bottom: 20px; /* Distância do fundo */
-            left: 50%; /* Centraliza horizontalmente */
-            transform: translateX(-50%); /* Ajusta a posição do botão */
+            top: 50%; /* Centralizado verticalmente */
+            left: 50%; /* Centralizado horizontalmente */
+            transform: translate(-50%, -50%); /* Mantém o botão centralizado */
         }
 
         .botao a {
@@ -81,11 +81,11 @@
             .qrcode {
                 width: 150px;
                 height: 150px;
-                top: 70%; /* Mantido para descer o QR Code em dispositivos móveis */
+                top: 75%; /* Mantido para descer o QR Code em dispositivos móveis */
             }
 
             .botao {
-                bottom: 20px; /* Distância do fundo para o botão */
+                top: 50%; /* Centraliza o botão no meio da tela em dispositivos móveis */
             }
 
             .botao a {

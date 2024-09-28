@@ -9,7 +9,7 @@
         body {
             font-family: 'Arial', sans-serif;
             background-image: url('Presenca.jpeg'); /* Caminho da imagem enviada */
-            background-size: cover; /* Torna a imagem de fundo responsiva */
+            background-size: cover; /* Responsivo para preencher a tela */
             background-position: center;
             background-repeat: no-repeat;
             margin: 0;
@@ -18,12 +18,12 @@
             overflow: hidden; /* Impede rolagem */
         }
 
-        /* Botão fixo */
+        /* Botão fixo para PC */
         .botao {
             position: fixed;
             left: 50%;
             transform: translate(-50%, 0);
-            bottom: 25%; /* Posição padrão do botão */
+            bottom: 20%; /* Posição ajustada para desktop */
         }
 
         .botao a {
@@ -48,37 +48,21 @@
             transform: translateY(1px);
         }
 
-        /* Ajustes para telas maiores (PC) */
-        @media (min-width: 768px) {
+        /* Ajustes para dispositivos móveis */
+        @media (max-width: 767px) {
             body {
-                background-size: cover;
+                background-size: cover; /* Mantém a imagem cobrindo a tela */
                 background-position: center;
             }
 
             .botao {
-                bottom: 20%; /* Ajuste fino para o botão no desktop */
-            }
-
-            .botao a {
-                font-size: 1.2rem; /* Fonte maior para desktop */
-                padding: 15px 80px; /* Botão mais espaçoso em telas maiores */
-            }
-        }
-
-        /* Ajustes para dispositivos móveis */
-        @media (max-width: 767px) {
-            body {
-                background-size: contain; /* No mobile, a imagem será totalmente visível */
-                background-position: top center;
-            }
-
-            .botao {
-                bottom: 25%; /* Mantém o botão mais centralizado no mobile */
+                bottom: 50%; /* Centraliza o botão verticalmente no mobile */
+                transform: translate(-50%, 50%); /* Ajuste fino para centralizar verticalmente */
             }
 
             .botao a {
                 font-size: 1rem; /* Tamanho da fonte ajustado para mobile */
-                padding: 10px 50px; /* Botão mais compacto em dispositivos móveis */
+                padding: 10px 40px; /* Botão mais compacto em dispositivos móveis */
             }
         }
     </style>

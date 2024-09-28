@@ -53,6 +53,10 @@
             body {
                 background-size: contain; /* Exibe a imagem inteira no mobile */
                 background-position: center center; /* Centraliza a imagem no mobile */
+                background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo semitransparente */
+                /* Adicionando um desfoque na parte superior e inferior */
+                background-image: linear-gradient(to bottom, rgba(200, 200, 200, 0.6), rgba(200, 200, 200, 0.6)), url('Presenca.jpeg');
+                height: 100vh; /* Mantém a altura */
             }
 
             .botao {
@@ -60,8 +64,8 @@
             }
 
             .botao a {
-                font-size: 0.9rem; /* Ajusta o tamanho da fonte no mobile */
-                padding: 8px 40px; /* Ajusta o tamanho do botão no mobile */
+                font-size: 0.8rem; /* Ajusta o tamanho da fonte no mobile */
+                padding: 6px 30px; /* Ajusta o tamanho do botão no mobile */
             }
         }
     </style>

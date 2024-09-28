@@ -9,7 +9,7 @@
         body {
             font-family: 'Arial', sans-serif;
             background-image: url('Presenca.jpeg'); /* Caminho da imagem enviada */
-            background-size: contain; /* Responsivo e impede cortes */
+            background-size: cover; /* Torna a imagem de fundo responsiva */
             background-position: center;
             background-repeat: no-repeat;
             margin: 0;
@@ -23,13 +23,13 @@
             position: fixed;
             left: 50%;
             transform: translate(-50%, 0);
-            bottom: 45%; /* Ajuste do botão para ficar um pouco mais baixo */
+            bottom: 25%; /* Posição padrão do botão */
         }
 
         .botao a {
             display: inline-block;
-            padding: 10px 60px; /* Diminuir a largura e altura do botão */
-            font-size: 1rem; /* Tamanho da fonte reduzido no mobile */
+            padding: 10px 60px;
+            font-size: 1.2rem;
             color: #fff;
             background-color: #C8A165;
             border-radius: 12px;
@@ -52,22 +52,33 @@
         @media (min-width: 768px) {
             body {
                 background-size: cover;
+                background-position: center;
             }
 
             .botao {
                 bottom: 20%; /* Ajuste fino para o botão no desktop */
             }
+
+            .botao a {
+                font-size: 1.2rem; /* Fonte maior para desktop */
+                padding: 15px 80px; /* Botão mais espaçoso em telas maiores */
+            }
         }
 
         /* Ajustes para dispositivos móveis */
         @media (max-width: 767px) {
+            body {
+                background-size: contain; /* No mobile, a imagem será totalmente visível */
+                background-position: top center;
+            }
+
             .botao {
-                bottom: 45%; /* Mantém o botão mais baixo em dispositivos móveis */
+                bottom: 25%; /* Mantém o botão mais centralizado no mobile */
             }
 
             .botao a {
-                font-size: 1rem; /* Tamanho da fonte reduzido no mobile */
-                padding: 10px 60px; /* Diminuir a largura e altura do botão em dispositivos móveis */
+                font-size: 1rem; /* Tamanho da fonte ajustado para mobile */
+                padding: 10px 50px; /* Botão mais compacto em dispositivos móveis */
             }
         }
     </style>

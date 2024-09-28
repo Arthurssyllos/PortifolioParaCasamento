@@ -8,28 +8,28 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-image: url('Presenca.jpeg'); /* Caminho da imagem enviada */
-            background-size: cover; /* Responsivo para preencher a tela */
+            background-image: url('Presenca.jpeg');
+            background-size: cover; /* Mantém o comportamento correto no PC */
             background-position: center;
             background-repeat: no-repeat;
             margin: 0;
             height: 100vh;
             position: relative;
-            overflow: hidden; /* Impede rolagem */
+            overflow: hidden;
         }
 
-        /* Botão fixo para PC */
+        /* Botão fixo */
         .botao {
             position: fixed;
             left: 50%;
             transform: translate(-50%, 0);
-            bottom: 20%; /* Posição ajustada para desktop */
+            bottom: 20%; /* Ajuste correto para PC */
         }
 
         .botao a {
             display: inline-block;
             padding: 10px 60px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #fff;
             background-color: #C8A165;
             border-radius: 12px;
@@ -48,21 +48,20 @@
             transform: translateY(1px);
         }
 
-        /* Ajustes para dispositivos móveis */
+        /* Ajustes apenas para dispositivos móveis */
         @media (max-width: 767px) {
             body {
-                background-size: cover; /* Mantém a imagem cobrindo a tela */
-                background-position: center;
+                background-size: contain; /* Exibe a imagem inteira no mobile */
+                background-position: top center; /* Garante que o topo da imagem fique visível */
             }
 
             .botao {
-                bottom: 50%; /* Centraliza o botão verticalmente no mobile */
-                transform: translate(-50%, 50%); /* Ajuste fino para centralizar verticalmente */
+                bottom: 15%; /* Move o botão um pouco mais acima no mobile */
             }
 
             .botao a {
-                font-size: 1rem; /* Tamanho da fonte ajustado para mobile */
-                padding: 10px 40px; /* Botão mais compacto em dispositivos móveis */
+                font-size: 0.9rem; /* Ajusta o tamanho da fonte para mobile */
+                padding: 8px 40px; /* Ajusta o tamanho do botão no mobile */
             }
         }
     </style>

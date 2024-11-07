@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>História de Camilly & Arthur</title>
     <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- Incluindo o Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4; /* Cor de fundo mais neutra */
+            background-color: #f4f4f4;
         }
 
         /* Header com título e subtítulo */
         header {
-            background-image: url('imagem-casal.jpg'); /* Imagem de fundo do casal */
+            background-image: url('imagem-casal.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -26,60 +30,42 @@
             align-items: center;
             color: white;
             text-align: center;
-            padding: 40px 20px; /* Aumentei o padding para afastar mais do topo */
-            margin-top: 40px; /* Adicionando margem para deslocar para baixo */
+            padding: 40px 20px;
+            margin-top: 40px;
         }
 
-        /* Estilo para o título */
         .title {
-            font-family: 'Arial', sans-serif; /* Fonte usada nas páginas anteriores */
+            font-family: 'Arial', sans-serif;
             font-size: 4rem;
             font-weight: bold;
             margin: 0;
             text-transform: uppercase;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); /* Sombra para dar mais destaque */
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
             letter-spacing: 2px;
             color: #fff;
-            animation: fadeIn 1s ease-in-out; /* Efeito de fade-in */
         }
 
-        /* Destaque no nome dos noivos */
         .highlight {
-            color: #00ff00; /* Verde suave */
-            font-family: 'Arial', sans-serif; /* Mantendo a fonte consistente */
+            color: #00ff00;
+            font-family: 'Arial', sans-serif;
             font-size: 4.5rem;
         }
 
-        /* Subtítulo (como a frase) */
         .subtitle {
-            font-family: 'Arial', sans-serif; /* Fonte usada nas páginas anteriores */
+            font-family: 'Arial', sans-serif;
             font-size: 2rem;
             font-style: italic;
-            color: #f0f9f1; /* Cor suave que complementa o verde */
+            color: #f0f9f1;
             margin-top: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1.5s ease-in-out;
         }
 
-        /* Animação para o fade-in */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Carrossel de Imagens */
         .carousel-container {
             position: relative;
             width: 100%;
-            max-width: 800px;
-            margin: 40px auto; /* Aumentei a margem superior */
-            overflow: hidden; /* Garante que as imagens fora da área visível sejam ocultadas */
+            max-width: 1200px; /* Aumentado o tamanho máximo do carrossel */
+            margin: 40px auto;
+            overflow: hidden;
         }
 
         .carousel-slide {
@@ -88,8 +74,13 @@
         }
 
         .carousel-image {
-            min-width: 100%; /* Garante que cada imagem ocupe 100% do contêiner */
-            transition: opacity 0.5s ease-in-out;
+            width: 33.33%;
+            transition: transform 0.5s ease-in-out;
+            transform: scale(0.85); /* Reduzi o tamanho padrão */
+        }
+
+        .carousel-slide .active {
+            transform: scale(1.2); /* Aumentando o tamanho da imagem central */
         }
 
         .carousel-slide img {
@@ -97,7 +88,6 @@
             object-fit: cover;
         }
 
-        /* Botões de navegação */
         .carousel-button {
             position: absolute;
             top: 50%;
@@ -119,10 +109,9 @@
             right: 10px;
         }
 
-        /* Seção da história */
         .story-section {
-            max-width: 900px;
-            margin: 100px auto; /* Aumentei consideravelmente a margem superior */
+            max-width: 1200px; /* Aumentado o tamanho da seção da história */
+            margin: 100px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 10px;
@@ -144,7 +133,6 @@
             line-height: 1.8;
         }
 
-        /* Responsividade */
         @media (max-width: 768px) {
             .title {
                 font-size: 3rem;
@@ -166,58 +154,84 @@
 </head>
 <body>
 
-    <!-- Header com título -->
-    <header>
-        <h1 class="title">A História de <span class="highlight">Camilly & Arthur</span></h1>
-        <p class="subtitle">Como o destino os uniu</p>
-    </header>
+<header>
+    <h1 class="title">A História de <span class="highlight">Camilly & Arthur</span></h1>
+    <p class="subtitle">Como o destino os uniu</p>
+</header>
 
-    <!-- Carrossel de Imagens -->
-    <div class="carousel-container">
-        <div class="carousel-slide">
-            <div class="carousel-image">
-                <img src="imagem1.jpeg" alt="Foto 1">
-            </div>
-            <div class="carousel-image">
-                <img src="imagem2.jpeg" alt="Foto 2">
-            </div>
-            <div class="carousel-image">
-                <img src="imagem3.jpeg" alt="Foto 3">
-            </div>
+<!-- Carrossel de Imagens -->
+<div class="carousel-container">
+    <div class="carousel-slide">
+        <div class="carousel-image" id="image1">
+            <img src="imagem1.jpeg" alt="Foto 1">
         </div>
-        <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
-        <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
+        <div class="carousel-image active" id="image2">
+            <img src="imagem2.jpeg" alt="Foto 2">
+        </div>
+        <div class="carousel-image" id="image3">
+            <img src="imagem3.jpeg" alt="Foto 3">
+        </div>
     </div>
+    <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
+</div>
 
-    <!-- Seção da História -->
-    <section class="story-section">
-        <h2>Nossa História</h2>
-        <p>
-            Camilly e Arthur se conheceram em um momento inusitado, como se o destino tivesse preparado o encontro perfeito para os dois. 
-            O que parecia ser apenas mais uma coincidência tornou-se uma história de amor verdadeira e duradoura.
-        </p>
-        <p>
-            O começo da história deles não foi nada tradicional, mas desde o primeiro momento, algo mágico aconteceu. Entre conversas 
-            e risadas, descobriram afinidades e desejos semelhantes para o futuro, o que fez com que a amizade fosse se transformando em algo 
-            muito mais especial.
-        </p>
-        <p>
-            O destino os uniu de uma maneira tão natural, como se todas as peças da vida tivessem se encaixado. E agora, aqui estão, 
-            prestes a celebrar o início de uma nova etapa, com muito amor e com a certeza de que foram feitos um para o outro.
-        </p>
-    </section>
+<!-- Seção da História -->
+<section class="story-section">
+    <h2>Nossa História</h2>
+    <p>
+        Camilly e Arthur se conheceram em um momento inusitado, como se o destino tivesse preparado o encontro perfeito para os dois. 
+        O que parecia ser apenas mais uma coincidência tornou-se uma história de amor verdadeira e duradoura.
+    </p>
+    <p>
+        O começo da história deles não foi nada tradicional, mas desde o primeiro momento, algo mágico aconteceu. Entre conversas 
+        e risadas, descobriram afinidades e desejos semelhantes para o futuro, o que fez com que a amizade fosse se transformando em algo 
+        muito mais especial.
+    </p>
+    <p>
+        O destino os uniu de uma maneira tão natural, como se todas as peças da vida tivessem se encaixado. E agora, aqui estão, 
+        prestes a celebrar o início de uma nova etapa, com muito amor e com a certeza de que foram feitos um para o outro.
+    </p>
+</section>
 
-    <script>
-        // Lógica do Carrossel
-        let slideIndex = 0;
+<!-- Incluindo o Bootstrap e o JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-        function moveSlide(step) {
-            const slides = document.querySelectorAll('.carousel-image');
-            slideIndex = (slideIndex + step + slides.length) % slides.length; // Garante que o índice seja válido
-            const newTransformValue = -slideIndex * 100; // Alinha a imagem correta no carrossel
-            document.querySelector('.carousel-slide').style.transform = `translateX(${newTransformValue}%)`;
-        }
-    </script>
+<script>
+    let slideIndex = 1; // Começa com a imagem 2 (índice 1) no centro
+
+    function moveSlide(step) {
+        const slides = document.querySelectorAll('.carousel-image');
+        const totalSlides = slides.length;
+
+        // Remover a classe 'active' de todas as imagens
+        slides.forEach(slide => slide.classList.remove('active'));
+
+        // Atualiza o índice da imagem central
+        slideIndex = (slideIndex + step + totalSlides) % totalSlides;
+
+        // Adicionar a classe 'active' à nova imagem central
+        slides[slideIndex].classList.add('active');
+
+        // Iniciar a animação de transição
+        document.querySelector('.carousel-slide').style.transition = "transform 0.5s ease-in-out";
+
+        // Atualiza a posição do carrossel para movimentar as imagens
+        document.querySelector('.carousel-slide').style.transform = `translateX(-${33.33 * slideIndex}%)`;
+
+        // Após a animação, redefinir a posição para evitar 'bug' e permitir um novo movimento
+        setTimeout(() => {
+            // Desativa a transição para correção da posição
+            document.querySelector('.carousel-slide').style.transition = "none";
+            document.querySelector('.carousel-slide').style.transform = `translateX(0%)`;
+
+            // Reaplica a transição após um pequeno atraso
+            setTimeout(() => {
+                document.querySelector('.carousel-slide').style.transition = "transform 0.5s ease-in-out";
+            }, 50);
+        }, 500); // Tempo de duração da animação
+    }
+</script>
 
 </body>
 </html>

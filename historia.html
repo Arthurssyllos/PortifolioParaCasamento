@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>História de Camilly & Arthur</title>
-    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="favicon4.png" type="image/png">
 
     <!-- Incluindo o Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,8 +35,7 @@
         }
 
         .title {
-            font-family: 'Arial', sans-serif;
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: bold;
             margin: 0;
             text-transform: uppercase;
@@ -47,29 +46,26 @@
 
         .highlight {
             color: #00ff00;
-            font-family: 'Arial', sans-serif;
-            font-size: 4.5rem;
+            font-size: 3.5rem;
         }
 
         .written {
-            font-family: 'Arial', sans-serif; /* Mesma fonte do título */
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #2c3e50; /* Tom de azul-escuro */
+            color: #2c3e50;
             text-align: center;
             line-height: 1.5;
             margin: 20px auto;
-            max-width: 800px; /* Limita a largura para uma melhor legibilidade */
+            max-width: 800px;
             padding: 10px;
-            background-color: #f9f9f9; /* Fundo claro para destaque */
-            border-left: 5px solid #00ff00; /* Barra verde para estilo */
+            background-color: #f9f9f9;
+            border-left: 5px solid #00ff00;
             border-radius: 10px;
             box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .subtitle {
-            font-family: 'Arial', sans-serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-style: italic;
             color: #f0f9f1;
             margin-top: 10px;
@@ -79,7 +75,7 @@
         .carousel-container {
             position: relative;
             width: 100%;
-            max-width: 1200px; /* Aumentado o tamanho máximo do carrossel */
+            max-width: 100%; /* Ajusta o carrossel para a largura total */
             margin: 40px auto;
             overflow: hidden;
         }
@@ -90,13 +86,13 @@
         }
 
         .carousel-image {
-            width: 33.33%;
+            width: 100%;
             transition: transform 0.5s ease-in-out;
-            transform: scale(0.85); /* Reduzi o tamanho padrão */
+            transform: scale(0.85);
         }
 
         .carousel-slide .active {
-            transform: scale(1.2); /* Aumentando o tamanho da imagem central */
+            transform: scale(1.2);
         }
 
         .carousel-slide img {
@@ -126,58 +122,68 @@
         }
 
         .story-section {
-            background-color: #f9f9f9; /* Fundo suave e claro */
-            padding: 40px 20px; /* Adiciona padding generoso */
+            background-color: #f9f9f9;
+            padding: 40px 20px;
             border-radius: 10px;
             max-width: 900px;
             margin: 50px auto;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar a seção */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .story-section h2 {
-            font-family: 'Arial', sans-serif;
             font-size: 2.5rem;
             font-weight: bold;
-            color: #2c3e50; /* Tom de azul-escuro */
+            color: #2c3e50;
             text-align: center;
-            margin-bottom: 20px; /* Espaçamento inferior */
+            margin-bottom: 20px;
         }
 
         .story-section p {
-            font-family: 'Arial', serif; /* Fonte serifada para um toque de sofisticação */
             font-size: 1.2rem;
             line-height: 1.8;
-            color: #333333; /* Cor de texto mais suave para leitura confortável */
-            text-align: justify; /* Justificado para dar formato bonito ao texto */
-            margin-bottom: 15px; /* Margem entre os parágrafos */
-            letter-spacing: 0.5px; /* Leve espaçamento entre letras para melhorar a leitura */
+            color: #333333;
+            text-align: justify;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
         }
 
         .story-section p:last-child {
-            margin-bottom: 0; /* Remove a margem inferior do último parágrafo */
+            margin-bottom: 0;
         }
 
         /* Adiciona um efeito visual ao passar o mouse */
         .story-section p:hover {
-            background-color: #f1f1f1; /* Fundo claro ao passar o mouse */
-            transition: background-color 0.3s ease; /* Transição suave */
+            background-color: #f1f1f1;
+            transition: background-color 0.3s ease;
         }
 
         @media (max-width: 768px) {
             .title {
-                font-size: 3rem;
+                font-size: 2.5rem; /* Reduz o tamanho no mobile */
             }
             .highlight {
-                font-size: 4rem;
+                font-size: 3rem;
             }
             .subtitle {
                 font-size: 1.5rem;
+            }
+            .written {
+                font-size: 1rem;
+            }
+            .carousel-button {
+                font-size: 1.5rem; /* Ajusta o tamanho dos botões */
             }
             .story-section h2 {
                 font-size: 2rem;
             }
             .story-section p {
                 font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-image {
+                width: 100%;
             }
         }
     </style>
@@ -217,46 +223,23 @@
         Em 17 de dezembro de 2022, esse laço se transformou em namoro, um capítulo cheio de risos, cumplicidade e descobertas. Cada dia era uma prova de que o que sentiam era verdadeiro e profundo. O amor, assim como uma chama suave e constante, iluminava suas vidas e os guiava em cada passo. No dia 22 de dezembro de 2023, um ano e alguns dias depois, Arthur fez o pedido mais importante de sua vida: convidou Camilly para ser sua companheira para sempre. A resposta foi um sim repleto de emoção e promessas silenciosas de um futuro repleto de aventuras, carinho e fé.
     </p>
     <p>
-        Hoje, Camilly e Arthur estão prestes a iniciar uma nova fase, prontos para celebrar essa história que é tão autêntica quanto o encontro inesperado que os uniu. Com o coração transbordando de amor e a certeza de que cada desafio e conquista os trouxeram até aqui, eles olham para frente, prontos para construir uma vida juntos. E assim, como no primeiro encontro, confiam que o destino continuará sorrindo para eles, colocando novas peças para que o quebra-cabeça de suas vidas continue se encaixando perfeitamente.
+        Hoje, Camilly e Arthur estão prestes a iniciar uma nova fase, prontos para celebrar essa história que é tão autêntica quanto o encontro inesperado que os uniu. Com o coração transbordando de amor e a certeza de que cada desafio e conquista os trouxeram até aqui, eles olham para frente, prontos para construir uma vida juntos. E assim, como no primeiro encontro, confiam que o destino continuará guiando seus passos em direção a um futuro brilhante, cheio de bênçãos e felicidade.
     </p>
 </section>
 
-<!-- Incluindo o Bootstrap e o JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+<!-- Adicionar o JavaScript do carrossel -->
 <script>
-    let slideIndex = 1; // Começa com a imagem 2 (índice 1) no centro
+    let currentSlide = 0;
 
     function moveSlide(step) {
-        const slides = document.querySelectorAll('.carousel-image');
-        const totalSlides = slides.length;
-
-        // Remover a classe 'active' de todas as imagens
-        slides.forEach(slide => slide.classList.remove('active'));
-
-        // Atualiza o índice da imagem central
-        slideIndex = (slideIndex + step + totalSlides) % totalSlides;
-
-        // Adicionar a classe 'active' à nova imagem central
-        slides[slideIndex].classList.add('active');
-
-        // Iniciar a animação de transição
-        document.querySelector('.carousel-slide').style.transition = "transform 0.5s ease-in-out";
-
-        // Atualiza a posição do carrossel para movimentar as imagens
-        document.querySelector('.carousel-slide').style.transform = `translateX(-${33.33 * slideIndex}%)`;
-
-        // Após a animação, redefinir a posição para evitar 'bug' e permitir um novo movimento
-        setTimeout(() => {
-            // Desativa a transição para correção da posição
-            document.querySelector('.carousel-slide').style.transition = "none";
-            document.querySelector('.carousel-slide').style.transform = `translateX(0%)`;
-
-            // Reaplica a transição após um pequeno atraso
-            setTimeout(() => {
-                document.querySelector('.carousel-slide').style.transition = "transform 0.5s ease-in-out";
-            }, 50);
-        }, 500); // Tempo de duração da animação
+        const images = document.querySelectorAll('.carousel-image');
+        currentSlide = (currentSlide + step + images.length) % images.length;
+        images.forEach((image, index) => {
+            image.classList.remove('active');
+            if (index === currentSlide) {
+                image.classList.add('active');
+            }
+        });
     }
 </script>
 

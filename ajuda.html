@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Ajuda - Casamento Camilly & Arthur</title>
+    <link rel="icon" href="favicon5.png" type="image/png">
+
+    <!-- Incluindo o Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f7f1; /* Fundo suave de verde claro */
+            color: #333;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* Animação de Fade In */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        header {
+            background-color: #8dbf89; /* Verde suave */
+            color: #fff;
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: slideInDown 1s ease-out;
+        }
+
+        /* Animação de slide para o cabeçalho */
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            color: #fff;
+        }
+
+        .help-section {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
+            opacity: 0;
+            animation: slideInUp 1s ease-out 0.5s forwards;
+        }
+
+        /* Animação de slide para os cards */
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .help-section:hover {
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #2e7d32; /* Verde escuro para o subtítulo */
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item button {
+            width: 100%;
+            text-align: left;
+            background-color: #8dbf89; /* Verde suave */
+            color: #fff;
+            padding: 18px;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: fadeInButton 1s ease-out 1s forwards;
+        }
+
+        /* Animação de fade-in para os botões */
+        @keyframes fadeInButton {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .faq-item button:hover {
+            background-color: #6d9f6f; /* Tom mais escuro de verde */
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-left: 5px solid #8dbf89; /* Verde suave para a borda */
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: #2e7d32; /* Verde escuro */
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #1b5e20; /* Tom mais escuro de verde */
+        }
+
+        .contribute-text {
+            margin-top: 40px;
+            font-size: 1.1rem;
+            text-align: center;
+            color: #555;
+        }
+
+        .contribute-text strong {
+            color: #2e7d32; /* Verde escuro para destacar o texto */
+        }
+
+        .faq-item button:focus,
+        .back-btn:focus {
+            outline: none;
+        }
+
+        /* Mobile responsivo */
+        @media (max-width: 767px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .help-section {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            .faq-item button {
+                font-size: 1rem;
+                padding: 15px;
+            }
+
+            .back-btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Página de Ajuda - Casamento Camilly & Arthur</h1>
+</header>
+
+<!-- Seção de Ajuda -->
+<div class="container help-section">
+    <h2>Como funciona o nosso site de casamento?</h2>
+
+    <p>Este site foi criado para facilitar sua experiência como convidado. Aqui você encontrará informações detalhadas sobre o evento, confirmação de presença e nossa lista de presentes.</p>
+
+    <div class="faq-item">
+        <button onclick="toggleAnswer(this)">Página Inicial</button>
+        <div class="faq-answer">
+            <p>A página inicial contém informações importantes sobre a data, o local e o evento de casamento. Nela, você pode acessar rapidamente tudo o que precisa saber.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button onclick="toggleAnswer(this)">Lista de Presentes</button>
+        <div class="faq-answer">
+            <p>A lista de presentes é uma maneira prática de escolher os itens que os noivos gostariam de receber. Acesse a lista e escolha o presente de sua preferência.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button onclick="toggleAnswer(this)">Confirmação de Presença</button>
+        <div class="faq-answer">
+            <p>A confirmação de presença é fácil! Basta clicar na página de confirmação e confirmar sua presença para o grande dia.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button onclick="toggleAnswer(this)">Como posso contribuir com mais para o casamento?</button>
+        <div class="faq-answer">
+            <p>Se você deseja contribuir ainda mais, aceitamos contribuições via PIX. A chave PIX é: <strong>arthurpereirasyllos@Hotmail.com</strong>. Sua ajuda é muito apreciada!</p>
+        </div>
+    </div>
+
+    <!-- Botão Voltar -->
+    <a href="index.html" class="back-btn">Voltar para a Página Inicial</a>
+
+    <!-- Texto de Contribuição -->
+    <div class="contribute-text">
+        <p>Se você quiser contribuir ainda mais para o nosso casamento, aceitamos com muito carinho a sua contribuição via PIX: <strong>arthurpereirasyllos@Hotmail.com</strong>. Agradecemos profundamente o seu apoio!</p>
+    </div>
+</div>
+
+<!-- Incluindo o Bootstrap JS e dependências -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+<script>
+    // Função para alternar a visibilidade das respostas
+    function toggleAnswer(button) {
+        const faqItem = button.parentElement;
+        faqItem.classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>

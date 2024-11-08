@@ -51,6 +51,22 @@
             font-size: 4.5rem;
         }
 
+        .written {
+            font-family: 'Arial', sans-serif; /* Mesma fonte do título */
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50; /* Tom de azul-escuro */
+            text-align: center;
+            line-height: 1.5;
+            margin: 20px auto;
+            max-width: 800px; /* Limita a largura para uma melhor legibilidade */
+            padding: 10px;
+            background-color: #f9f9f9; /* Fundo claro para destaque */
+            border-left: 5px solid #00ff00; /* Barra verde para estilo */
+            border-radius: 10px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
         .subtitle {
             font-family: 'Arial', sans-serif;
             font-size: 2rem;
@@ -110,27 +126,41 @@
         }
 
         .story-section {
-            max-width: 1200px; /* Aumentado o tamanho da seção da história */
-            margin: 100px auto;
-            padding: 20px;
-            background-color: #fff;
+            background-color: #f9f9f9; /* Fundo suave e claro */
+            padding: 40px 20px; /* Adiciona padding generoso */
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: justify;
+            max-width: 900px;
+            margin: 50px auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar a seção */
         }
 
         .story-section h2 {
             font-family: 'Arial', sans-serif;
             font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2c3e50; /* Tom de azul-escuro */
             text-align: center;
+            margin-bottom: 20px; /* Espaçamento inferior */
         }
 
         .story-section p {
+            font-family: 'Arial', serif; /* Fonte serifada para um toque de sofisticação */
             font-size: 1.2rem;
-            color: #555;
             line-height: 1.8;
+            color: #333333; /* Cor de texto mais suave para leitura confortável */
+            text-align: justify; /* Justificado para dar formato bonito ao texto */
+            margin-bottom: 15px; /* Margem entre os parágrafos */
+            letter-spacing: 0.5px; /* Leve espaçamento entre letras para melhorar a leitura */
+        }
+
+        .story-section p:last-child {
+            margin-bottom: 0; /* Remove a margem inferior do último parágrafo */
+        }
+
+        /* Adiciona um efeito visual ao passar o mouse */
+        .story-section p:hover {
+            background-color: #f1f1f1; /* Fundo claro ao passar o mouse */
+            transition: background-color 0.3s ease; /* Transição suave */
         }
 
         @media (max-width: 768px) {
@@ -156,7 +186,8 @@
 
 <header>
     <h1 class="title">A História de <span class="highlight">Camilly & Arthur</span></h1>
-    <p class="subtitle">Como o destino os uniu</p>
+    <p class="subtitle">"Como o destino os uniu.."</p>
+    <h2 class="written">"Deus mudou o teu caminho até juntares com o meu e guardou a tua vida separando-a para mim. Para onde fores, irei. Onde tu repousares, repousarei. Teu Deus será o meu Deus. Teu caminho o meu será. 💚"</h2>
 </header>
 
 <!-- Carrossel de Imagens -->
@@ -180,17 +211,13 @@
 <section class="story-section">
     <h2>Nossa História</h2>
     <p>
-        Camilly e Arthur se conheceram em um momento inusitado, como se o destino tivesse preparado o encontro perfeito para os dois. 
-        O que parecia ser apenas mais uma coincidência tornou-se uma história de amor verdadeira e duradoura.
+        Camilly e Arthur se encontraram pela primeira vez em agosto de 2022, em uma ocasião inesperada que parecia ter sido cuidadosamente orquestrada pelo destino. Foi após um culto da mocidade, durante um simples lanche noturno, que tudo começou. Enquanto a noite chegava ao fim e as despedidas se aproximavam, Arthur reuniu coragem para ir até Camilly e iniciar uma conversa que mudaria suas vidas para sempre. Um gesto singelo, um pedido de contato, e uma nova jornada se iniciou. Desde aquele momento, algo profundo começou a florescer entre eles. As primeiras conversas revelaram muito mais do que interesses comuns; mostraram sonhos semelhantes, valores compartilhados e um desejo sincero de construir um futuro lado a lado. A amizade que nasceu ali se tornou a base de um amor que cresceu com intensidade e ternura.
     </p>
     <p>
-        O começo da história deles não foi nada tradicional, mas desde o primeiro momento, algo mágico aconteceu. Entre conversas 
-        e risadas, descobriram afinidades e desejos semelhantes para o futuro, o que fez com que a amizade fosse se transformando em algo 
-        muito mais especial.
+        Em 17 de dezembro de 2022, esse laço se transformou em namoro, um capítulo cheio de risos, cumplicidade e descobertas. Cada dia era uma prova de que o que sentiam era verdadeiro e profundo. O amor, assim como uma chama suave e constante, iluminava suas vidas e os guiava em cada passo. No dia 22 de dezembro de 2023, um ano e alguns dias depois, Arthur fez o pedido mais importante de sua vida: convidou Camilly para ser sua companheira para sempre. A resposta foi um sim repleto de emoção e promessas silenciosas de um futuro repleto de aventuras, carinho e fé.
     </p>
     <p>
-        O destino os uniu de uma maneira tão natural, como se todas as peças da vida tivessem se encaixado. E agora, aqui estão, 
-        prestes a celebrar o início de uma nova etapa, com muito amor e com a certeza de que foram feitos um para o outro.
+        Hoje, Camilly e Arthur estão prestes a iniciar uma nova fase, prontos para celebrar essa história que é tão autêntica quanto o encontro inesperado que os uniu. Com o coração transbordando de amor e a certeza de que cada desafio e conquista os trouxeram até aqui, eles olham para frente, prontos para construir uma vida juntos. E assim, como no primeiro encontro, confiam que o destino continuará sorrindo para eles, colocando novas peças para que o quebra-cabeça de suas vidas continue se encaixando perfeitamente.
     </p>
 </section>
 

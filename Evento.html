@@ -6,6 +6,17 @@
     <title>O Evento - Camilly & Arthur</title>
     <link rel="icon" href="favicon3.png" type="image/png">
     <style>
+        /* Definindo animação para o fade-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Estilos para a página */
         body {
             font-family: 'Arial', sans-serif;
             background-image: url('fazendaBoaEsperanca.jpeg'); /* Caminho da imagem da fazenda */
@@ -21,6 +32,7 @@
             justify-content: center; /* Centraliza verticalmente */
             align-items: center; /* Centraliza horizontalmente */
             overflow: hidden; /* Remove a rolagem */
+            animation: fadeIn 1s ease-out; /* Animação de fade-in */
         }
 
         h1 {
@@ -29,26 +41,58 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para destacar o texto */
         }
 
-        p {
-            font-size: 1.5rem;
-            margin: 20px 0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-        }
-
+        /* Melhorando o card do evento */
         .evento-info {
             background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente para destaque */
-            padding: 20px;
-            border-radius: 10px; /* Cantos arredondados */
+            padding: 50px; /* Aumentando o padding para um card maior */
+            border-radius: 15px; /* Cantos arredondados */
             display: inline-block; /* Para centralizar o bloco */
             margin-top: 30px;
+            box-shadow: 0 6px 50px rgba(0, 0, 0, 0.7); /* Sombra maior para o card */
+            width: 80%; /* Largura maior do card */
+            max-width: 800px; /* Largura máxima para não esticar demais em telas grandes */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição suave */
+            position: relative; /* Para posicionar o ícone de voltar no canto */
+        }
+
+        .evento-info:hover {
+            transform: scale(1.05); /* Leve aumento de tamanho ao passar o mouse */
+            box-shadow: 0 6px 70px rgba(0, 0, 0, 0.8); /* Aumento da sombra no hover */
+        }
+
+        /* Estilos para o ícone de voltar */
+        .voltar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .voltar:hover {
+            color: #4CAF50; /* Verde quando o ícone for hovered */
         }
 
         .localizacao {
-            margin-top: 10px;
+            margin-top: 15px;
             font-size: 1.2rem;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
 
+        /* Adicionando um desfoque maior no fundo */
+        .background-blur {
+            filter: blur(15px); /* Aumento do desfoque */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Coloca o fundo atrás do conteúdo */
+        }
+
+        /* Ajustando a responsividade */
         @media (max-width: 600px) {
             h1 {
                 font-size: 2.5rem; /* Tamanho menor em telas pequenas */
@@ -59,15 +103,22 @@
             }
 
             .evento-info {
-                padding: 15px; /* Menos padding em telas pequenas */
+                padding: 30px; /* Menos padding em telas pequenas */
             }
         }
     </style>
 </head>
 <body>
 
-    <h1>O Evento</h1>
+    <!-- Adicionando a camada de fundo desfocada -->
+    <div class="background-blur"></div>
+
+    <!-- Card de evento com informações -->
     <div class="evento-info">
+        <!-- Ícone de voltar no canto superior esquerdo -->
+        <a href="index.html" class="voltar">←</a>
+
+        <h1>O Evento</h1>
         <p><strong>Data:</strong> 08 de Junho de 2025</p>
         <p><strong>Horário:</strong> 16:00</p>
         <p><strong>Local:</strong> Fazenda Boa Esperança</p>

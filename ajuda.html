@@ -16,6 +16,8 @@
             color: #333;
             opacity: 0;
             animation: fadeIn 1s ease-out forwards;
+            padding: 0;
+            margin: 0;
         }
 
         /* Animação de Fade In */
@@ -181,13 +183,26 @@
 
         /* Mobile responsivo */
         @media (max-width: 767px) {
+            body {
+                font-size: 14px;
+            }
+
             header h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                padding: 20px;
             }
 
             .help-section {
-                padding: 20px;
-                margin: 20px;
+                padding: 15px;
+                margin: 15px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
             }
 
             .faq-item button {
@@ -198,6 +213,42 @@
             .back-btn {
                 font-size: 1rem;
                 padding: 10px 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .contribute-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Para telas muito pequenas (exemplo: smartphones antigos ou telas pequenas) */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            .help-section {
+                padding: 10px;
+                margin: 10px;
+            }
+
+            .faq-item button {
+                font-size: 0.9rem;
+                padding: 12px;
+            }
+
+            .faq-answer {
+                padding: 15px;
+            }
+
+            .back-btn {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+
+            .contribute-text {
+                font-size: 0.9rem;
             }
         }
     </style>

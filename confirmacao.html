@@ -7,28 +7,63 @@
     <link rel="icon" href="favicon2.png" type="image/png">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Georgia', serif;
             background-image: url('Presenca.jpeg');
-            background-size: cover; /* Mantém o comportamento correto no PC */
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
-            position: relative;
+            color: #555;
+            text-align: center;
             overflow: hidden;
         }
 
-        /* Botão fixo */
-        .botao {
+        .overlay {
             position: fixed;
-            left: 50%;
-            transform: translate(-50%, 0);
-            bottom: 20%; /* Ajuste correto para PC */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid #e2dcd5;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 2.5rem;
+            color: #6d4c41;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: #7d5a50;
+        }
+
+        .botao {
+            margin-top: 30px;
         }
 
         .botao a {
             display: inline-block;
-            padding: 10px 60px;
+            padding: 12px 30px;
             font-size: 1rem;
             color: #fff;
             background-color: #C8A165;
@@ -48,31 +83,34 @@
             transform: translateY(1px);
         }
 
-        /* Ajustes apenas para dispositivos móveis */
-        @media (max-width: 767px) {
-            body {
-                background-size: contain; /* Exibe a imagem inteira no mobile */
-                background-position: center center; /* Centraliza a imagem no mobile */
-                background-color: rgba(200, 200, 200, 0.6); /* Cor de fundo semitransparente */
-            }
+        /* Estilo do botão de voltar */
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #6d4c41;
+            cursor: pointer;
+            z-index: 3;
+            transition: color 0.3s;
+        }
 
-            .botao {
-                bottom: 38%; /* Move o botão ainda mais para cima no mobile */
-            }
-
-            .botao a {
-                font-size: 0.50rem; /* Ajusta ainda mais o tamanho da fonte no mobile */
-                padding: 3px 3px; /* Diminuindo ainda mais o tamanho do botão no mobile */
-            }
+        .back-button:hover {
+            color: #b38d4c;
         }
     </style>
 </head>
 <body>
-
-    <!-- Botão para confirmar presença -->
-    <div class="botao">
-        <a href="https://wa.me/5512992264185?text=Olá%2C%20tudo%20bem%3F%20Sou%20convidado%20da%20celebração%20entre%20o%20casamento%20de%20Camilly%20%26%20Arthur%2C%20estou%20confirmando%20minha%20presença%20por%20aqui%2C%20obrigado!" target="_blank">Confirmar Presença</a>
+    <div class="overlay"></div>
+    <div class="container">
+        <button class="back-button" onclick="window.location.href='index.html';">←</button>
+        <h1>Confirmação de Presença</h1>
+        <p>"Sua presença é o melhor presente que poderíamos receber. Vamos celebrar juntos este momento inesquecível!"</p>
+        <div class="botao">
+            <a href="https://wa.me/5512992264185?text=Olá%2C%20tudo%20bem%3F%20Sou%20convidado%20da%20celebração%20entre%20o%20casamento%20de%20Camilly%20%26%20Arthur%2C%20estou%20confirmando%20minha%20presença%20por%20aqui%2C%20obrigado!" target="_blank">Confirmar Presença</a>
+        </div>
     </div>
-
 </body>
 </html>

@@ -6,39 +6,105 @@
     <title>Lista de Presentes - Camilly & Arthur</title>
     <link rel="icon" href="favicon1.png" type="image/png">
     <style>
+        /* Estilos para a página */
         body {
             font-family: 'Arial', sans-serif;
             background-image: url('ListaPresentes.jpeg'); /* Caminho da imagem de fundo */
-            background-size: contain; /* Faz a imagem cobrir o conteúdo */
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
             background-position: center; /* Centraliza a imagem */
-            background-repeat: no-repeat; /* Evita a repetição da imagem */
-            margin: 0;
-            height: 100vh;
-            position: relative; /* Necessário para usar posicionamento absoluto */
-            overflow: hidden; /* Impede rolagem */
+            background-attachment: fixed;
+            margin: 0; /* Remove margens padrão do body */
+            height: 100vh; /* Garante que o body tenha 100% da altura da viewport */
+            display: flex; /* Usando flexbox para centralizar conteúdo */
+            flex-direction: column; /* Orientação vertical */
+            justify-content: center; /* Centraliza verticalmente */
+            align-items: center; /* Centraliza horizontalmente */
+            overflow: hidden; /* Remove a rolagem */
         }
 
-        /* Estilo do QR Code */
+        /* Overlay com desfoque (imediato) */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(8px); /* Aplica o desfoque no fundo */
+            z-index: 1;
+            animation: none; /* Desativa a animação do overlay */
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 40px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            animation: fadeIn 1s ease-out; /* Animação de fade-in no card */
+        }
+
+        /* Efeito de escala (zoom) no card */
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo do ícone de Voltar */
+        .voltar-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            color: #6d4c41;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .voltar-icon:hover {
+            color: #4CAF50;
+        }
+
+        h1 {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 2.5rem;
+            color: #6d4c41;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: #7d5a50;
+            margin-bottom: 30px;
+        }
+
         .qrcode {
-            position: fixed; /* Mantém a posição fixa */
-            top: 75%; /* Ajustado para descer o QR Code */
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 170px;
-            height: 170px;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
         }
 
-        /* Estilo do botão */
         .botao {
-            position: fixed; /* Mantém a posição fixa */
-            top: 50%; /* Centralizado verticalmente */
-            left: 50%; /* Centralizado horizontalmente */
-            transform: translate(-50%, -50%); /* Mantém o botão centralizado */
+            margin-top: 20px;
         }
 
         .botao a {
             display: inline-block;
-            padding: 16px 21px;
+            padding: 12px 24px;
             font-size: 1.2rem;
             color: #fff;
             background-color: #C8A165;
@@ -58,57 +124,63 @@
             transform: translateY(1px);
         }
 
-        /* Ajustes para telas maiores */
-        @media (min-width: 768px) {
-            body {
-                background-size: cover;
-            }
-
-            /* Ajustar o QR Code para telas maiores */
-            .qrcode {
-                top: 70%; /* QR Code um pouco mais para baixo no PC */
-            }
-        }
-
-        @media (min-width: 1200px) {
-            body {
-                background-size: contain;
-            }
-        }
-
-        /* Ajustes para dispositivos móveis */
-        @media (max-width: 767px) {
-            body {
-                background-size: cover; /* Volta para o comportamento anterior no celular */
-            }
-
-            /* Ajustar QR Code e Botão para telas pequenas */
+        /* Responsividade */
+        @media (max-width: 768px) {
             .qrcode {
                 width: 150px;
                 height: 150px;
-                top: 75%; /* Ajustado para descer o QR Code um pouco mais em dispositivos móveis */
-            }
-
-            /* Ajuste específico para o botão no mobile */
-            .botao {
-                top: 54%; /* Botão mais para cima no mobile */
             }
 
             .botao a {
-                font-size: 0.9rem; /* Diminui o tamanho da fonte do botão para telas menores */
-                padding: 10px 18px; /* Menor altura e largura do botão em dispositivos móveis */
+                font-size: 1rem;
+                padding: 10px 18px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .voltar-icon {
+                font-size: 1.5rem;
+                top: 10px;
+                left: 10px;
+            }
+        }
+
+        /* Animação para o fade-in no card */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- QR Code centralizado dentro do quadrado -->
-    <img src="qrcode_lista_presente.png" alt="QR Code" class="qrcode">
-    
-    <!-- Botão para acessar a lista de presentes -->
-    <div class="botao">
-        <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/772958" target="_blank">Ir até a Lista de Presentes</a>
+    <!-- Fundo desfocado -->
+    <div class="overlay"></div>
+
+    <!-- Container da página -->
+    <div class="container">
+        <!-- Card com a informação -->
+        <div class="card">
+            <!-- Ícone de Voltar no canto superior esquerdo -->
+            <span onclick="window.history.back()" class="voltar-icon">&#x2190;</span>
+
+            <h1>Lista de Presentes</h1>
+            <p>Nosso maior presente é a sua presença! Caso queira nos presentear, clique abaixo para ver nossa lista.</p>
+            
+            <!-- QR Code -->
+            <img src="qrcode_lista_presente.png" alt="QR Code" class="qrcode">
+
+            <!-- Botão para ver lista de presentes -->
+            <div class="botao">
+                <a href="https://link-da-lista-de-presentes.com" target="_blank">Ver Lista de Presentes</a>
+            </div>
+        </div>
     </div>
 
 </body>

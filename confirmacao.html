@@ -22,6 +22,7 @@
             overflow: hidden;
         }
 
+        /* Overlay para aplicar o desfoque */
         .overlay {
             position: fixed;
             top: 0;
@@ -30,6 +31,8 @@
             height: 100%;
             backdrop-filter: blur(10px);
             z-index: 1;
+            /* Certifique-se de usar um fundo com opacidade para o efeito */
+            background-color: rgba(255, 255, 255, 0.3); /* Fundo branco com opacidade */
         }
 
         .container {
@@ -42,10 +45,18 @@
             width: 90%;
             border: 1px solid #e2dcd5;
             z-index: 2;
+            animation: fadeIn 1s ease-out;
+            margin-top: 60px; /* Aumento para mover mais para baixo */
+        }
+
+        /* Efeito de escala (zoom) no card */
+        .container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
         }
 
         h1 {
-            font-family: 'Brush Script MT', cursive;
+            font-family: 'Arial', sans-serif;
             font-size: 2.5rem;
             color: #6d4c41;
             margin-bottom: 20px;
@@ -58,6 +69,7 @@
         }
 
         .botao {
+            font-family: 'Arial', sans-serif;
             margin-top: 30px;
         }
 
@@ -83,7 +95,6 @@
             transform: translateY(1px);
         }
 
-        /* Estilo do botão de voltar */
         .back-button {
             position: absolute;
             top: 10px;
@@ -99,6 +110,15 @@
 
         .back-button:hover {
             color: #b38d4c;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>

@@ -14,7 +14,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background-color: #e3f9e5; /* Cor verde claro */
         }
 
         /* Header com título e subtítulo */
@@ -121,6 +121,7 @@
             right: 10px;
         }
 
+        /* Seção da História */
         .story-section {
             background-color: #f9f9f9;
             padding: 40px 20px;
@@ -128,6 +129,7 @@
             max-width: 900px;
             margin: 50px auto;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative; /* Para posicionar o ícone de voltar */
         }
 
         .story-section h2 {
@@ -151,7 +153,22 @@
             margin-bottom: 0;
         }
 
-        /* Adiciona um efeito visual ao passar o mouse */
+        /* Ícone de voltar no canto superior esquerdo */
+        .voltar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .voltar:hover {
+            color: #00ff00; /* Cor verde ao passar o mouse */
+        }
+
+        /* Adicionando um efeito visual ao passar o mouse */
         .story-section p:hover {
             background-color: #f1f1f1;
             transition: background-color 0.3s ease;
@@ -215,7 +232,10 @@
 
 <!-- Seção da História -->
 <section class="story-section">
-    <h2>Nossa História</h2>
+    <!-- Ícone de voltar no canto superior esquerdo -->
+    <a href="index.html" class="voltar">←</a>
+    
+    <h2>💚 Nossa História 💚</h2>
     <p>
         Camilly e Arthur se encontraram pela primeira vez em agosto de 2022, em uma ocasião inesperada que parecia ter sido cuidadosamente orquestrada pelo destino. Foi após um culto da mocidade, durante um simples lanche noturno, que tudo começou. Enquanto a noite chegava ao fim e as despedidas se aproximavam, Arthur reuniu coragem para ir até Camilly e iniciar uma conversa que mudaria suas vidas para sempre. Um gesto singelo, um pedido de contato, e uma nova jornada se iniciou. Desde aquele momento, algo profundo começou a florescer entre eles. As primeiras conversas revelaram muito mais do que interesses comuns; mostraram sonhos semelhantes, valores compartilhados e um desejo sincero de construir um futuro lado a lado. A amizade que nasceu ali se tornou a base de um amor que cresceu com intensidade e ternura.
     </p>
@@ -227,7 +247,6 @@
     </p>
 </section>
 
-<!-- Adicionar o JavaScript do carrossel -->
 <script>
     let currentSlide = 0;
 

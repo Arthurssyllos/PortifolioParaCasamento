@@ -6,126 +6,132 @@
     <title>O Evento - Camilly & Arthur</title>
     <link rel="icon" href="favicon3.png" type="image/png">
     <style>
-        /* Definindo animação para o fade-in */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Estilos para a página */
+        /* Estilos globais */
         body {
             font-family: 'Arial', sans-serif;
-            background-image: url('fazendaBoaEsperanca.jpeg'); /* Caminho da imagem da fazenda */
-            background-size: cover; /* Faz a imagem cobrir toda a tela */
-            background-position: center; /* Centraliza a imagem */
-            background-repeat: no-repeat; /* Evita a repetição da imagem */
-            text-align: center;
-            color: #fff; /* Cor do texto */
-            margin: 0; /* Remove margens padrão do body */
-            height: 100vh; /* Garante que o body tenha 100% da altura da viewport */
-            display: flex; /* Usando flexbox para centralizar conteúdo */
-            flex-direction: column; /* Orientação vertical */
-            justify-content: center; /* Centraliza verticalmente */
-            align-items: center; /* Centraliza horizontalmente */
-            overflow: hidden; /* Remove a rolagem */
-            animation: fadeIn 1s ease-out; /* Animação de fade-in */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para destacar o texto */
-        }
-
-        /* Melhorando o card do evento */
-        .evento-info {
-            background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente para destaque */
-            padding: 50px; /* Aumentando o padding para um card maior */
-            border-radius: 15px; /* Cantos arredondados */
-            display: inline-block; /* Para centralizar o bloco */
-            margin-top: 30px;
-            box-shadow: 0 6px 50px rgba(0, 0, 0, 0.7); /* Sombra maior para o card */
-            width: 80%; /* Largura maior do card */
-            max-width: 800px; /* Largura máxima para não esticar demais em telas grandes */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição suave */
-            position: relative; /* Para posicionar o ícone de voltar no canto */
-        }
-
-        .evento-info:hover {
-            transform: scale(1.05); /* Leve aumento de tamanho ao passar o mouse */
-            box-shadow: 0 6px 70px rgba(0, 0, 0, 0.8); /* Aumento da sombra no hover */
-        }
-
-        /* Estilos para o ícone de voltar */
-        .voltar {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 2rem;
-            color: #fff;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .voltar:hover {
-            color: #4CAF50; /* Verde quando o ícone for hovered */
-        }
-
-        .localizacao {
-            margin-top: 15px;
-            font-size: 1.2rem;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-        }
-
-        /* Adicionando um desfoque maior no fundo */
-        .background-blur {
-            filter: blur(15px); /* Aumento do desfoque */
-            position: absolute;
+        /* Imagem de fundo */
+        .background {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Coloca o fundo atrás do conteúdo */
+            background-image: url('fazendaBoaEsperanca.jpeg'); /* Caminho da imagem */
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
         }
 
-        /* Ajustando a responsividade */
+        /* Desfoque aplicado ao fundo */
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: -1;
+        }
+
+        /* Caixa de informações */
+        .evento-info {
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+            color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1.2s ease-out forwards; /* Efeito de entrada */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .localizacao a {
+            color: #4CAF50;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        /* Ícone de voltar */
+        .voltar {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .voltar:hover {
+            text-decoration: underline;
+        }
+
+        /* Animação de entrada */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsividade */
         @media (max-width: 600px) {
             h1 {
-                font-size: 2.5rem; /* Tamanho menor em telas pequenas */
+                font-size: 2rem;
             }
 
             p {
-                font-size: 1.2rem; /* Tamanho menor para o texto da mensagem */
-            }
-
-            .evento-info {
-                padding: 30px; /* Menos padding em telas pequenas */
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Adicionando a camada de fundo desfocada -->
-    <div class="background-blur"></div>
+    <!-- Fundo com desfoque -->
+    <div class="background"></div>
+    <div class="background-overlay"></div>
 
-    <!-- Card de evento com informações -->
+    <!-- Informações do evento -->
     <div class="evento-info">
-        <!-- Ícone de voltar no canto superior esquerdo -->
-        <a href="index.html" class="voltar">←</a>
-
-        <h1>O Evento 👰🏻 🍾 🤵🏻</h1>
+        <!-- Ícone de voltar -->
+        <a href="javascript:history.back()" class="voltar">
+            ⬅
+        </a>
+        <h1>O Evento 👰🏻 🤵🏻</h1>
         <p><strong>Data:</strong> 08 de Junho de 2025 📅</p>
-        <p><strong>Horário:</strong> 16:30 🕟</p>
+        <p><strong>Horário:</strong> 16:00 🕟</p>
         <p><strong>Local:</strong> Fazenda Boa Esperança 🛤️</p>
-        <div class="localizacao">
+        <p class="localizacao">
             <span>📍</span>
-            <a href="https://www.google.com/maps/dir//Estr.+Mun.+Itapecirica,+6755+-+Itapecerica,+Taubat%C3%A9+-+SP,+12086-020/@-23.0816641,-45.6110798,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94ccfec464897283:0x6daf6dc897d3e998!2m2!1d-45.5286782!2d-23.0816855?entry=ttu&g_ep=EgoyMDI0MDkyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="color: #fff; text-decoration: underline;">Ver no Google Maps</a>
-        </div>
+            <a href="https://www.google.com/maps/dir//Estr.+Mun.+Itapecirica,+6755+-+Itapecerica,+Taubat%C3%A9+-+SP,+12086-020/@-23.0816641,-45.6110798,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94ccfec464897283:0x6daf6dc897d3e998!2m2!1d-45.5286782!2d-23.0816855?entry=ttu&g_ep=EgoyMDI0MDkyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">Ver no Google Maps</a>
+        </p>
     </div>
 
 </body>

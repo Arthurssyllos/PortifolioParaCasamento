@@ -163,6 +163,13 @@
             }
         }
 
+        /* Estilo para o áudio escondido */
+        .hidden-audio {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
             .card {
@@ -268,9 +275,27 @@
         </div>
     </div>
 
+    <!-- Elemento de áudio - SUBSTITUA pelo seu arquivo .mp4 -->
+    <audio id="champagneSound" class="hidden-audio" preload="auto">
+        <source src="202503312324.mp4" type="audio/mp4">
+    </audio>
+
     <script>
-        // Função para criar o efeito de bolhas
-        function createBubbleEffect(event) {
+        // Pré-carrega o áudio quando a página é carregada
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('champagneSound');
+            audio.volume = 0.3; // Ajuste o volume conforme necessário
+            audio.load().catch(e => console.log("Pré-carregamento de áudio não permitido"));
+        });
+
+        // Função para criar o efeito de bolhas e tocar o som
+        function createChampagneEffect(event) {
+            // Toca o som
+            const audio = document.getElementById('champagneSound');
+            audio.currentTime = 0; // Reinicia o áudio
+            audio.play().catch(error => console.log("Reprodução de áudio bloqueada:", error));
+
+            // Cria as bolhas
             const colors = ['rgba(255, 255, 255, 0.9)', 'rgba(255, 255, 255, 0.7)', 'rgba(255, 245, 230, 0.8)'];
             const buttonRect = event.target.getBoundingClientRect();
             const centerX = buttonRect.left + buttonRect.width / 2;
@@ -304,13 +329,13 @@
         // Eventos de clique nos botões
         document.getElementById('listaPresentesBtn').addEventListener('click', function(e) {
             e.preventDefault();
-            createBubbleEffect(e);
+            createChampagneEffect(e);
             setTimeout(() => window.location.href = "https://lista.havan.com.br/Convidado/ItensListaPresente/772958", 2000);
         });
 
         document.getElementById('mensagensBtn').addEventListener('click', function(e) {
             e.preventDefault();
-            createBubbleEffect(e);
+            createChampagneEffect(e);
             setTimeout(() => window.location.href = "mensagens.html", 2000);
         });
     </script>

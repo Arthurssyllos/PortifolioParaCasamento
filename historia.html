@@ -5,16 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>História de Camilly & Arthur</title>
     <link rel="icon" href="favicon4.png" type="image/png">
-
+    
     <!-- Incluindo o Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    
     <style>
+        /* Efeito de pré-carregamento e animação de entrada */
         body {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #e3f9e5; /* Cor verde claro */
+            background-color: #e3f9e5;
+            overflow-x: hidden;
+        }
+        
+        body.loaded {
+            opacity: 1;
+        }
+        
+        /* Pétalas de flores animadas */
+        .petal {
+            position: fixed;
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            animation: falling linear infinite;
+        }
+        
+        @keyframes falling {
+            0% {
+                transform: translate(0, -10vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(var(--random-x), 100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         /* Header com título e subtítulo */
@@ -32,6 +68,14 @@
             text-align: center;
             padding: 40px 20px;
             margin-top: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 0.5s, transform 1s ease-out 0.5s;
+        }
+        
+        body.loaded header {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .title {
@@ -42,7 +86,7 @@
             text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
             letter-spacing: 2px;
             color: #fff;
-            padding-top: 20px; /* Adicionando um espaçamento acima do título */
+            padding-top: 20px;
         }
 
         .highlight {
@@ -63,22 +107,104 @@
             border-left: 5px solid #00ff00;
             border-radius: 10px;
             box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1s ease-out 1s, transform 1s ease-out 1s;
+        }
+        
+        body.loaded .written {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .subtitle {
             font-size: 1.8rem;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-out 0.8s;
+            position: relative;
+            display: inline-block;
+            padding: 0 40px;
+        }
+        
+        body.loaded .subtitle {
+            opacity: 1;
+        }
+
+        .highlight-text {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
             font-style: italic;
-            color: #f0f9f1;
-            margin-top: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            text-shadow: 
+                0 0 5px rgba(255, 255, 255, 0.3),
+                0 0 10px rgba(0, 255, 0, 0.2);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .highlight-text::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.5), transparent);
+            animation: underline-grow 2s ease-out forwards;
+        }
+
+        .quote-mark {
+            position: absolute;
+            font-size: 3.5rem;
+            color: rgba(0, 255, 0, 0.3);
+            opacity: 0.5;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Times New Roman', serif;
+            transition: all 0.3s ease;
+        }
+
+        .quote-mark.left {
+            left: 0;
+        }
+
+        .quote-mark.right {
+            right: 0;
+        }
+
+        .subtitle:hover .quote-mark {
+            opacity: 0.8;
+            color: rgba(0, 255, 0, 0.5);
+        }
+
+        @keyframes underline-grow {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            100% {
+                width: 100%;
+                opacity: 1;
+            }
         }
 
         .carousel-container {
             position: relative;
             width: 100%;
-            max-width: 100%; /* Ajusta o carrossel para a largura total */
+            max-width: 100%;
             margin: 40px auto;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 1.2s, transform 1s ease-out 1.2s;
+        }
+        
+        body.loaded .carousel-container {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .carousel-slide {
@@ -130,7 +256,44 @@
             max-width: 900px;
             margin: 50px auto;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: relative; /* Para posicionar o ícone de voltar */
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 1.5s, transform 1s ease-out 1.5s;
+        }
+        
+        body.loaded .story-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Ícone de voltar PERFEITAMENTE centralizado */
+        .voltar {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 1.8rem;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: rgba(249, 249, 249, 0.7);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
+            line-height: 1;
+            padding: 0;
+            margin: 0;
+        }
+
+        .voltar:hover {
+            color: #00ff00;
+            background-color: rgba(249, 249, 249, 0.9);
+            transform: scale(1.1);
         }
 
         .story-section h2 {
@@ -139,6 +302,8 @@
             color: #2c3e50;
             text-align: center;
             margin-bottom: 20px;
+            padding-top: 20px;
+            position: relative;
         }
 
         .story-section p {
@@ -154,53 +319,132 @@
             margin-bottom: 0;
         }
 
-        /* Ícone de voltar no canto superior esquerdo */
-        .voltar {
-            position: absolute;
-            top: 30px;  /* Ajustado para dar mais espaço entre o ícone e o título */
-            left: 20px;
-            font-size: 2rem;
-            color: #333;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .voltar:hover {
-            color: #00ff00; /* Cor verde ao passar o mouse */
-        }
-
-        /* Adicionando um efeito visual ao passar o mouse */
+        /* Efeito visual ao passar o mouse sobre os parágrafos */
         .story-section p:hover {
             background-color: #f1f1f1;
             transition: background-color 0.3s ease;
         }
 
+        /* Estilo do botão da galeria */
+        .gallery-redirect {
+            text-align: center;
+            margin: 60px auto;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-out 1.8s;
+        }
+        
+        body.loaded .gallery-redirect {
+            opacity: 1;
+        }
+
+        .cta {
+            position: relative;
+            margin: auto;
+            padding: 12px 18px;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .cta:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            border-radius: 50px;
+            background: #b1dae7;
+            width: 45px;
+            height: 45px;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta span {
+            position: relative;
+            font-family: "Arial", sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #2c3e50;
+        }
+
+        .cta svg {
+            position: relative;
+            top: 0;
+            margin-left: 10px;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke: #2c3e50;
+            stroke-width: 2;
+            transform: translateX(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .cta:hover:before {
+            width: 100%;
+            background: #00ff00;
+        }
+
+        .cta:hover svg {
+            transform: translateX(0);
+        }
+
+        .cta:active {
+            transform: scale(0.95);
+        }
+
         @media (max-width: 768px) {
             .title {
-                font-size: 2.5rem; /* Reduz o tamanho no mobile */
+                font-size: 2.5rem;
             }
             .highlight {
                 font-size: 3rem;
             }
             .subtitle {
                 font-size: 1.5rem;
+                padding: 0 30px;
+            }
+            .highlight-text {
+                font-size: 1.5rem;
+            }
+            .quote-mark {
+                font-size: 3rem;
             }
             .written {
                 font-size: 1rem;
             }
             .carousel-button {
-                font-size: 1.5rem; /* Ajusta o tamanho dos botões */
+                font-size: 1.5rem;
+            }
+            .voltar {
+                top: 10px;
+                left: 10px;
+                font-size: 1.5rem;
+                width: 36px;
+                height: 36px;
             }
             .story-section h2 {
                 font-size: 2rem;
+                padding-top: 15px;
+                margin-left: 20px;
+                margin-right: 20px;
             }
             .story-section p {
                 font-size: 1rem;
             }
-
-            .voltar {
-                font-size: 1.5rem; /* Ajusta o tamanho do ícone de voltar */
-                top: 20px; /* Ajuste do espaçamento superior */
+            .cta span {
+                font-size: 16px;
+            }
+            .cta:before {
+                width: 40px;
+                height: 40px;
             }
         }
 
@@ -208,14 +452,42 @@
             .carousel-image {
                 width: 100%;
             }
+            .subtitle {
+                font-size: 1.3rem;
+                padding: 0 25px;
+            }
+            .highlight-text {
+                font-size: 1.3rem;
+            }
+            .quote-mark {
+                font-size: 2.5rem;
+            }
+            .voltar {
+                top: 8px;
+                left: 8px;
+                font-size: 1.3rem;
+                width: 32px;
+                height: 32px;
+            }
+            .story-section h2 {
+                font-size: 1.8rem;
+                padding-top: 10px;
+            }
         }
     </style>
 </head>
 <body>
 
+<!-- Pétalas de flores serão adicionadas via JavaScript -->
+<div id="petals-container"></div>
+
 <header>
     <h1 class="title">A História de <span class="highlight">Camilly & Arthur</span></h1>
-    <p class="subtitle">"Como o destino os uniu.."</p>
+    <p class="subtitle">
+        <span class="quote-mark left">“</span>
+        <span class="highlight-text">Como o destino os uniu..</span>
+        <span class="quote-mark right">”</span>
+    </p>
     <h2 class="written">"Deus mudou o teu caminho até juntares com o meu e guardou a tua vida separando-a para mim. Para onde fores, irei. Onde tu repousares, repousarei. Teu Deus será o meu Deus. Teu caminho o meu será. 💚"</h2>
 </header>
 
@@ -238,8 +510,7 @@
 
 <!-- Seção da História -->
 <section class="story-section">
-    <!-- Ícone de voltar no canto superior esquerdo -->
-    <a href="index.html" class="voltar">←</a>
+    <a href="index.html" class="voltar" aria-label="Voltar">←</a>
     
     <h2>💚 Nossa História 💚</h2>
     <p>
@@ -253,7 +524,27 @@
     </p>
 </section>
 
+<!-- Seção de Redirecionamento para a Galeria -->
+<section class="gallery-redirect">
+    <a href="galeria.html" class="cta">
+        <span>Ver Galeria de Fotos</span>
+        <svg width="15px" height="10px" viewBox="0 0 13 10">
+            <path d="M1,5 L11,5"></path>
+            <polyline points="8 1 12 5 8 9"></polyline>
+        </svg>
+    </a>
+</section>
+
 <script>
+    // Efeito de carregamento da página
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // Inicia as pétalas após a página carregar
+        createPetals();
+    });
+
+    // Carrossel de imagens
     let currentSlide = 0;
 
     function moveSlide(step) {
@@ -265,6 +556,58 @@
                 image.classList.add('active');
             }
         });
+    }
+
+    // Cria pétalas de flores caindo
+    function createPetals() {
+        const petalsContainer = document.getElementById('petals-container');
+        const petalCount = 15; // Número de pétalas
+        
+        // Cores das pétalas (tons de verde e branco para combinar com o tema)
+        const petalColors = [
+            'rgba(144, 238, 144, 0.7)', // verde claro
+            'rgba(152, 251, 152, 0.7)', // verde pálido
+            'rgba(240, 255, 240, 0.7)', // branco melancia
+            'rgba(0, 255, 127, 0.7)',   // verde primavera
+            'rgba(255, 255, 255, 0.7)'  // branco
+        ];
+        
+        // Formas de pétalas (em SVG)
+        const petalShapes = [
+            'M10,5 C10,15 20,15 20,5 C20,-5 10,-5 10,5 Z', // forma oval
+            'M15,0 C20,5 20,15 10,15 C0,15 0,5 5,0 C7.5,-2.5 12.5,-2.5 15,0 Z', // forma de flor
+            'M10,0 C15,10 5,10 10,20 C15,10 5,10 10,0 Z' // forma de folha
+        ];
+        
+        for (let i = 0; i < petalCount; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            
+            // Tamanho aleatório entre 10px e 25px
+            const size = Math.random() * 15 + 10;
+            
+            // Posição horizontal aleatória
+            const startX = Math.random() * 100;
+            
+            // Configurações aleatórias para cada pétala
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            petal.style.left = `${startX}vw`;
+            petal.style.fill = petalColors[Math.floor(Math.random() * petalColors.length)];
+            petal.style.animationDuration = `${Math.random() * 10 + 10}s`; // entre 10 e 20 segundos
+            petal.style.animationDelay = `${Math.random() * 5}s`; // começar em momentos diferentes
+            petal.style.setProperty('--random-x', `${Math.random() * 20 - 10}vw`); // movimento horizontal
+            
+            // Cria um SVG para a pétala
+            petal.innerHTML = `
+                <svg viewBox="0 0 20 20" width="${size}" height="${size}">
+                    <path d="${petalShapes[Math.floor(Math.random() * petalShapes.length)]}" 
+                          fill="${petalColors[Math.floor(Math.random() * petalColors.length)]}" />
+                </svg>
+            `;
+            
+            petalsContainer.appendChild(petal);
+        }
     }
 </script>
 

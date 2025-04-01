@@ -22,17 +22,16 @@
             overflow: hidden;
         }
 
-        /* Overlay para aplicar o desfoque */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            backdrop-filter: blur(10px); /* Desfoque */
-            -webkit-backdrop-filter: blur(10px); /* Prefixo para Safari */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1;
-            background-color: rgba(255, 255, 255, 0.3); /* Fundo branco com opacidade */
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         .container {
@@ -46,10 +45,9 @@
             border: 1px solid #e2dcd5;
             z-index: 2;
             animation: fadeIn 1s ease-out;
-            margin-top: 60px; /* Aumento para mover mais para baixo */
+            margin-top: 60px;
         }
 
-        /* Efeito de escala (zoom) no card */
         .container:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
@@ -71,6 +69,8 @@
         .botao {
             font-family: 'Arial', sans-serif;
             margin-top: 30px;
+            position: relative;
+            z-index: 10;
         }
 
         .botao a {
@@ -84,6 +84,8 @@
             font-weight: bold;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: background-color 0.3s, transform 0.3s;
+            position: relative;
+            z-index: 5;
         }
 
         .botao a:hover {
@@ -112,12 +114,47 @@
             color: #b38d4c;
         }
 
+        .observacao {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(200, 161, 101, 0.1);
+            border-left: 3px solid #C8A165;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #6d4c41;
+            animation: pulse 2s infinite;
+        }
+
+        /* Estilo para os confetes */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            z-index: 9999;
+            animation: confetti-fall 3s ease-in-out forwards;
+        }
+
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
                 opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
             }
         }
     </style>
@@ -128,9 +165,72 @@
         <button class="back-button" onclick="window.location.href='index.html';">←</button>
         <h1>Confirmação de Presença 💌</h1>
         <p>"Sua presença é o melhor presente que poderíamos receber. Vamos celebrar juntos este momento inesquecível!" 🥂</p>
+        
+        <div class="observacao">
+            Por favor, confirme sua presença até <strong>25/04/2025</strong>
+        </div>
+        
         <div class="botao">
-            <a href="https://wa.me/5512992264185?text=Olá%2C%20tudo%20bem%3F%20Sou%20convidado%20da%20celebração%20entre%20o%20casamento%20de%20Camilly%20%26%20Arthur%2C%20estou%20confirmando%20minha%20presença%20por%20aqui%2C%20obrigado!" target="_blank">Confirmar Presença</a>
+            <a href="#" id="confirmarBtn">Confirmar Presença</a>
         </div>
     </div>
+
+    <script>
+        document.getElementById('confirmarBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Criar confetes
+            createConfetti();
+            
+            // Redirecionar após a animação
+            setTimeout(function() {
+                window.location.href = "https://wa.me/5512988568837?text=Olá,%20tudo%20bem?%20%0ASou%20convidado%20da%20celebração%20entre%20o%20casamento%20de%20Camilly%20%26%20Arthur,%20estou%20confirmando%20minha%20presença%20por%20aqui,%20obrigado!%20%0ANomes:%20";
+            }, 2000);
+        });
+
+        function createConfetti() {
+            const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Posição aleatória na horizontal
+                const left = Math.random() * 100;
+                
+                // Cor aleatória
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Tamanho aleatório
+                const size = Math.random() * 10 + 5;
+                
+                // Tempo de animação aleatório
+                const animationDuration = Math.random() * 3 + 2;
+                
+                // Atraso aleatório
+                const delay = Math.random() * 2;
+                
+                // Forma aleatória (quadrado ou círculo)
+                const borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                
+                // Configurações do confete
+                confetti.style.left = `${left}vw`;
+                confetti.style.backgroundColor = color;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.borderRadius = borderRadius;
+                confetti.style.animationDuration = `${animationDuration}s`;
+                confetti.style.animationDelay = `${delay}s`;
+                
+                // Adicionar ao body
+                document.body.appendChild(confetti);
+                
+                // Remover após a animação
+                setTimeout(() => {
+                    confetti.remove();
+                }, animationDuration * 1000);
+            }
+        }
+    </script>
 </body>
 </html>

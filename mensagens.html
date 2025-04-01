@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens - Camilly & Arthur</title>
+    <link rel="icon" href="favicon6.png" type="image/png">
+    <style>
+        /* Estilos base da página de história */
+        body {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #e3f9e5;
+            overflow: hidden; /* Alterado para hidden para remover scroll */
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        body.loaded {
+            opacity: 1;
+        }
+        
+        /* Pétalas de flores animadas */
+        .petal {
+            position: fixed;
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            animation: falling linear infinite;
+        }
+        
+        @keyframes falling {
+            0% {
+                transform: translate(0, -10vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(var(--random-x), 100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header com título */
+        header {
+            background-image: url('imagem-casal.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 30vh; /* Reduzido para caber melhor na tela */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 0.5s, transform 1s ease-out 0.5s;
+        }
+        
+        body.loaded header {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .highlight {
+            color: #00ff00;
+        }
+
+        /* Formulário de mensagens - adaptado do login-box */
+        .message-box {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto; /* Reduzida a margem superior */
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0,0,0,.1);
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 1s, transform 1s ease-out 1s;
+        }
+        
+        body.loaded .message-box {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message-box .user-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .message-box .user-box input,
+        .message-box .user-box textarea {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #333;
+            border: none;
+            border-bottom: 1px solid #2c3e50;
+            outline: none;
+            background: transparent;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .message-box .user-box textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .message-box .user-box label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #2c3e50;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .message-box .user-box input:focus ~ label,
+        .message-box .user-box input:valid ~ label,
+        .message-box .user-box textarea:focus ~ label,
+        .message-box .user-box textarea:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #00a000;
+            font-size: 12px;
+        }
+
+        .message-box form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #2c3e50;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 20px;
+            letter-spacing: 4px;
+            background: #e3f9e5;
+            border-radius: 5px;
+            border: 1px solid #00a000;
+        }
+
+        .message-box a:hover {
+            background: #00ff00;
+            color: #fff;
+            box-shadow: 0 0 5px #03f40f,
+                        0 0 25px #03f40f,
+                        0 0 50px #03f40f,
+                        0 0 100px #03f40f;
+        }
+
+        /* Player de áudio personalizado */
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            height: 80px;
+            background-color: rgba(40, 40, 40, 0.8);
+            border-radius: 8px;
+            padding: 8px;
+            box-sizing: border-box;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 1.2s, transform 1s ease-out 1.2s;
+        }
+        
+        body.loaded .audio-player {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .album-cover {
+            width: 64px;
+            height: 64px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin-right: 12px;
+            background-image: url('musica-capa.jpg');
+            background-size: cover;
+        }
+
+        .player-controls {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .song-info {
+            margin-bottom: 4px;
+        }
+
+        .song-title {
+            font-size: 16px;
+            color: #fff;
+            margin: 0;
+        }
+
+        .artist {
+            font-size: 12px;
+            color: #b3b3b3;
+            margin: 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #4f4f4f;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: #1db954;
+        }
+
+        .buttons {
+            display: flex;
+        }
+
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .play-btn,
+        .pause-btn {
+            font-size: 16px;
+            color: #fff;
+            margin-right: 8px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .play-btn:hover,
+        .pause-btn:hover {
+            transform: scale(1.2);
+        }
+
+        /* Botão de visualizar mensagens - NOVO ESTILO */
+        .view-messages-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 16px 36px;
+            border: 4px solid;
+            border-color: transparent;
+            font-size: 16px;
+            background-color: inherit;
+            border-radius: 100px;
+            font-weight: 600;
+            color: #00ff00;
+            box-shadow: 0 0 0 2px #00ff00;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 1s ease-out 1.4s, transform 1s ease-out 1.4s;
+        }
+        
+        body.loaded .view-messages-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .view-messages-btn svg {
+            position: absolute;
+            width: 24px;
+            fill: #00ff00;
+            z-index: 9;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .view-messages-btn .arr-1 {
+            right: 16px;
+        }
+
+        .view-messages-btn .arr-2 {
+            left: -25%;
+        }
+
+        .view-messages-btn .circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .view-messages-btn .text {
+            position: relative;
+            z-index: 1;
+            transform: translateX(-12px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .view-messages-btn:hover {
+            box-shadow: 0 0 0 12px transparent;
+            color: #212121;
+            border-radius: 12px;
+        }
+
+        .view-messages-btn:hover .arr-1 {
+            right: -25%;
+        }
+
+        .view-messages-btn:hover .arr-2 {
+            left: 16px;
+        }
+
+        .view-messages-btn:hover .text {
+            transform: translateX(12px);
+        }
+
+        .view-messages-btn:hover svg {
+            fill: #212121;
+        }
+
+        .view-messages-btn:active {
+            scale: 0.95;
+            box-shadow: 0 0 0 4px #00ff00;
+        }
+
+        .view-messages-btn:hover .circle {
+            width: 220px;
+            height: 220px;
+            opacity: 1;
+        }
+
+        /* Ícone de voltar */
+        .voltar {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 1.8rem;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
+            line-height: 1;
+            padding: 0;
+            margin: 0;
+        }
+
+        .voltar:hover {
+            color: #00ff00;
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .message-box {
+                padding: 30px;
+                width: 85%;
+            }
+            
+            .audio-player {
+                width: 250px;
+                left: 10px;
+                bottom: 10px;
+            }
+            
+            .album-cover {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .view-messages-btn {
+                right: 10px;
+                bottom: 10px;
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+            
+            .voltar {
+                top: 10px;
+                left: 10px;
+                font-size: 1.5rem;
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                height: 25vh; /* Ajustado para caber melhor em telas pequenas */
+                padding: 15px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .message-box {
+                padding: 20px;
+                width: 90%;
+                margin: 15px auto;
+            }
+            
+            .audio-player {
+                width: 90%;
+                left: 5%;
+                bottom: 80px;
+            }
+            
+            .view-messages-btn {
+                width: calc(90% - 40px);
+                right: 5%;
+                bottom: 20px;
+                text-align: center;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Pétalas de flores serão adicionadas via JavaScript -->
+<div id="petals-container"></div>
+
+<!-- Botão Voltar -->
+<a href="index.html" class="voltar" aria-label="Voltar">←</a>
+
+<header>
+    <h1 class="title">Deixe sua <span class="highlight">Mensagem 🤍</span></h1>
+</header>
+
+<!-- Formulário de Mensagens -->
+<div class="message-box">
+    <form id="messageForm">
+        <div class="user-box">
+            <input type="text" id="name" name="name" required>
+            <label>Seu Nome</label>
+        </div>
+        <div class="user-box">
+            <textarea id="message" name="message" required></textarea>
+            <label>Sua Mensagem</label>
+        </div>
+        <center>
+            <a href="#" id="submitBtn">
+                ENVIAR
+                <span></span>
+            </a>
+        </center>
+    </form>
+</div>
+
+<!-- Player de Áudio -->
+<div class="audio-player">
+    <div class="album-cover"></div>
+    <div class="player-controls">
+        <div class="song-info">
+            <div class="song-title">Música Especial</div>
+            <p class="artist">Camilly & Arthur</p>
+        </div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <div class="buttons">
+            <button class="play-btn">
+                <svg viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="white" d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"></path>
+                </svg>
+            </button>
+            <button class="pause-btn" style="display: none;">
+                <svg viewBox="0 0 16 16" class="bi bi-pause-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="white" d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Botão para visualizar mensagens - NOVO ESTILO -->
+<button class="view-messages-btn" id="viewMessagesBtn">
+    <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+    </svg>
+    <span class="text">Visualizar Mensagens</span>
+    <span class="circle"></span>
+    <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+    </svg>
+</button>
+
+<!-- Áudio (invisível) -->
+<audio id="backgroundMusic">
+    <source src="musica1.mp3" type="audio/mp3">
+    <source src="musica2.mp3" type="audio/mp3">
+    <source src="musica3.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    // Efeito de carregamento da página
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // Inicia as pétalas após a página carregar
+        createPetals();
+        
+        // Inicializa o player de música
+        initMusicPlayer();
+    });
+
+    // Cria pétalas de flores caindo
+    function createPetals() {
+        const petalsContainer = document.getElementById('petals-container');
+        const petalCount = 15;
+        
+        const petalColors = [
+            'rgba(144, 238, 144, 0.7)',
+            'rgba(152, 251, 152, 0.7)',
+            'rgba(240, 255, 240, 0.7)',
+            'rgba(0, 255, 127, 0.7)',
+            'rgba(255, 255, 255, 0.7)'
+        ];
+        
+        const petalShapes = [
+            'M10,5 C10,15 20,15 20,5 C20,-5 10,-5 10,5 Z',
+            'M15,0 C20,5 20,15 10,15 C0,15 0,5 5,0 C7.5,-2.5 12.5,-2.5 15,0 Z',
+            'M10,0 C15,10 5,10 10,20 C15,10 5,10 10,0 Z'
+        ];
+        
+        for (let i = 0; i < petalCount; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            
+            const size = Math.random() * 15 + 10;
+            const startX = Math.random() * 100;
+            
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            petal.style.left = `${startX}vw`;
+            petal.style.fill = petalColors[Math.floor(Math.random() * petalColors.length)];
+            petal.style.animationDuration = `${Math.random() * 10 + 10}s`;
+            petal.style.animationDelay = `${Math.random() * 5}s`;
+            petal.style.setProperty('--random-x', `${Math.random() * 20 - 10}vw`);
+            
+            petal.innerHTML = `
+                <svg viewBox="0 0 20 20" width="${size}" height="${size}">
+                    <path d="${petalShapes[Math.floor(Math.random() * petalShapes.length)]}" 
+                          fill="${petalColors[Math.floor(Math.random() * petalColors.length)]}" />
+                </svg>
+            `;
+            
+            petalsContainer.appendChild(petal);
+        }
+    }
+
+    // Player de música
+    function initMusicPlayer() {
+        const audio = document.getElementById('backgroundMusic');
+        const playBtn = document.querySelector('.play-btn');
+        const pauseBtn = document.querySelector('.pause-btn');
+        const progressBar = document.querySelector('.progress');
+        const songTitles = ["Nossa Canção", "Música do Amor", "Melodia Especial"];
+        const songArtists = ["Camilly & Arthur", "Para o Casal", "Momento Único"];
+        let currentSongIndex = 0;
+        
+        // Lista de músicas (substitua pelos seus arquivos)
+        const songs = ['musica1.mp3', 'musica2.mp3', 'musica3.mp3'];
+        
+        // Atualiza a informação da música
+        function updateSongInfo() {
+            document.querySelector('.song-title').textContent = songTitles[currentSongIndex];
+            document.querySelector('.artist').textContent = songArtists[currentSongIndex];
+        }
+        
+        // Atualiza a barra de progresso
+        audio.addEventListener('timeupdate', function() {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // Se a música acabou, vai para a próxima
+            if (audio.currentTime >= audio.duration - 0.1) {
+                nextSong();
+            }
+        });
+        
+        // Botão play
+        playBtn.addEventListener('click', function() {
+            audio.play();
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'block';
+        });
+        
+        // Botão pause
+        pauseBtn.addEventListener('click', function() {
+            audio.pause();
+            pauseBtn.style.display = 'none';
+            playBtn.style.display = 'block';
+        });
+        
+        // Próxima música
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            audio.src = songs[currentSongIndex];
+            updateSongInfo();
+            audio.play();
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'block';
+        }
+        
+        // Inicia a primeira música
+        audio.src = songs[0];
+        updateSongInfo();
+        
+        // Clique na barra de progresso para avançar/retroceder
+        document.querySelector('.progress-bar').addEventListener('click', function(e) {
+            const percent = e.offsetX / this.offsetWidth;
+            audio.currentTime = percent * audio.duration;
+        });
+    }
+
+    // Formulário de mensagens
+    document.getElementById('submitBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        if (name && message) {
+            const messages = JSON.parse(localStorage.getItem('weddingMessages')) || [];
+            messages.push({
+                name: name,
+                message: message,
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('weddingMessages', JSON.stringify(messages));
+            
+            // Limpa o formulário
+            document.getElementById('name').value = '';
+            document.getElementById('message').value = '';
+            
+            // Feedback para o usuário
+            alert('Mensagem enviada com sucesso! Obrigado pelo carinho 💚');
+        } else {
+            alert('Por favor, preencha todos os campos!');
+        }
+    });
+
+    // Botão para visualizar mensagens
+    document.getElementById('viewMessagesBtn').addEventListener('click', function() {
+        // Aqui você pode redirecionar para uma página de visualização de mensagens
+        // ou mostrar as mensagens em um modal
+        alert('Esta funcionalidade irá mostrar todas as mensagens recebidas.');
+        // window.location.href = "visualizar-mensagens.html";
+    });
+</script>
+
+</body>
+</html>

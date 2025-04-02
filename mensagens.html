@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mensagens - Camilly & Arthur</title>
     <link rel="icon" href="favicon6.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Estilos base da página de história */
         body {
@@ -14,7 +15,7 @@
             padding: 0;
             font-family: 'Arial', sans-serif;
             background-color: #e3f9e5;
-            overflow: hidden; /* Alterado para hidden para remover scroll */
+            overflow: hidden;
             min-height: 100vh;
             position: relative;
             display: flex;
@@ -60,7 +61,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 30vh; /* Reduzido para caber melhor na tela */
+            height: 25vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -79,7 +80,7 @@
         }
 
         .title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
             margin: 0;
             text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
@@ -91,13 +92,13 @@
             color: #00ff00;
         }
 
-        /* Formulário de mensagens - adaptado do login-box */
+        /* Formulário de mensagens */
         .message-box {
             position: relative;
             width: 90%;
-            max-width: 500px;
-            margin: 20px auto; /* Reduzida a margem superior */
-            padding: 40px;
+            max-width: 450px;
+            margin: 15px auto;
+            padding: 25px;
             background: rgba(255, 255, 255, 0.9);
             box-sizing: border-box;
             box-shadow: 0 15px 25px rgba(0,0,0,.1);
@@ -114,14 +115,14 @@
 
         .message-box .user-box {
             position: relative;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .message-box .user-box input,
         .message-box .user-box textarea {
             width: 100%;
-            padding: 10px 0;
-            font-size: 16px;
+            padding: 8px 0;
+            font-size: 14px;
             color: #333;
             border: none;
             border-bottom: 1px solid #2c3e50;
@@ -131,7 +132,7 @@
         }
 
         .message-box .user-box textarea {
-            min-height: 100px;
+            min-height: 80px;
             resize: vertical;
         }
 
@@ -139,8 +140,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            padding: 10px 0;
-            font-size: 16px;
+            padding: 8px 0;
+            font-size: 14px;
             color: #2c3e50;
             pointer-events: none;
             transition: .5s;
@@ -150,24 +151,24 @@
         .message-box .user-box input:valid ~ label,
         .message-box .user-box textarea:focus ~ label,
         .message-box .user-box textarea:valid ~ label {
-            top: -20px;
+            top: -18px;
             left: 0;
             color: #00a000;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .message-box form a {
             position: relative;
             display: inline-block;
-            padding: 10px 20px;
+            padding: 8px 16px;
             color: #2c3e50;
-            font-size: 16px;
+            font-size: 14px;
             text-decoration: none;
             text-transform: uppercase;
             overflow: hidden;
             transition: .5s;
-            margin-top: 20px;
-            letter-spacing: 4px;
+            margin-top: 15px;
+            letter-spacing: 3px;
             background: #e3f9e5;
             border-radius: 5px;
             border: 1px solid #00a000;
@@ -182,19 +183,107 @@
                         0 0 100px #03f40f;
         }
 
-        /* Player de áudio personalizado */
-        .audio-player {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
+        /* Seção de upload de foto */
+        .photo-upload {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .photo-preview {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #00a000;
+            margin-bottom: 8px;
+            display: none;
+        }
+
+        .avatar-options {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .avatar-option {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 300px;
-            height: 80px;
+            background-color: #f0fff0;
+        }
+
+        .avatar-option:hover {
+            transform: scale(1.1);
+            border-color: #00a000;
+        }
+
+        .avatar-option.selected {
+            border-color: #00ff00;
+            box-shadow: 0 0 5px #00ff00;
+        }
+
+        .no-photo {
+            background-color: #e3f9e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 10px;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .avatar-option i {
+            font-size: 16px;
+            color: #00a000;
+        }
+
+        .upload-btn {
+            background-color: #e3f9e5;
+            color: #2c3e50;
+            border: 1px solid #00a000;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        .upload-btn:hover {
+            background-color: #00ff00;
+            color: white;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Player de áudio personalizado */
+        .audio-player {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 280px;
+            height: 70px;
             background-color: rgba(40, 40, 40, 0.8);
             border-radius: 8px;
-            padding: 8px;
+            padding: 6px;
             box-sizing: border-box;
             z-index: 100;
             opacity: 0;
@@ -208,11 +297,11 @@
         }
 
         .album-cover {
-            width: 64px;
-            height: 64px;
+            width: 56px;
+            height: 56px;
             background-color: #fff;
             border-radius: 50%;
-            margin-right: 12px;
+            margin-right: 10px;
             background-image: url('musica-capa.jpg');
             background-size: cover;
         }
@@ -221,36 +310,48 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .song-info {
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .song-title {
-            font-size: 16px;
+            font-size: 14px;
             color: #fff;
             margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .artist {
-            font-size: 12px;
+            font-size: 11px;
             color: #b3b3b3;
             margin: 0;
         }
 
         .progress-bar {
             width: 100%;
-            height: 4px;
+            height: 3px;
             background-color: #4f4f4f;
             border-radius: 2px;
             overflow: hidden;
+            margin-bottom: 5px;
         }
 
         .progress {
             width: 0%;
             height: 100%;
             background-color: #1db954;
+        }
+
+        .music-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .buttons {
@@ -262,13 +363,15 @@
             border: none;
             cursor: pointer;
             outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .play-btn,
         .pause-btn {
-            font-size: 16px;
+            font-size: 14px;
             color: #fff;
-            margin-right: 8px;
             transition: transform 0.2s ease-in-out;
         }
 
@@ -277,18 +380,34 @@
             transform: scale(1.2);
         }
 
-        /* Botão de visualizar mensagens - NOVO ESTILO */
+        .prev-btn,
+        .next-btn {
+            font-size: 14px;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+            padding: 5px;
+        }
+
+        .prev-btn:hover,
+        .next-btn:hover {
+            transform: scale(1.2);
+        }
+
+        /* Botão de visualizar mensagens */
         .view-messages-btn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             display: flex;
             align-items: center;
             gap: 4px;
-            padding: 16px 36px;
+            padding: 14px 30px;
             border: 4px solid;
             border-color: transparent;
-            font-size: 16px;
+            font-size: 14px;
             background-color: inherit;
             border-radius: 100px;
             font-weight: 600;
@@ -310,14 +429,14 @@
 
         .view-messages-btn svg {
             position: absolute;
-            width: 24px;
+            width: 20px;
             fill: #00ff00;
             z-index: 9;
             transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .view-messages-btn .arr-1 {
-            right: 16px;
+            right: 14px;
         }
 
         .view-messages-btn .arr-2 {
@@ -329,8 +448,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             background-color: #00ff00;
             border-radius: 50%;
             opacity: 0;
@@ -340,7 +459,7 @@
         .view-messages-btn .text {
             position: relative;
             z-index: 1;
-            transform: translateX(-12px);
+            transform: translateX(-10px);
             transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
@@ -355,11 +474,11 @@
         }
 
         .view-messages-btn:hover .arr-2 {
-            left: 16px;
+            left: 14px;
         }
 
         .view-messages-btn:hover .text {
-            transform: translateX(12px);
+            transform: translateX(10px);
         }
 
         .view-messages-btn:hover svg {
@@ -372,24 +491,139 @@
         }
 
         .view-messages-btn:hover .circle {
-            width: 220px;
-            height: 220px;
+            width: 200px;
+            height: 200px;
             opacity: 1;
+        }
+
+        /* Modal de visualização de mensagens */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #e3f9e5;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #00a000;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #2c3e50;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #00a000;
+        }
+
+        .message-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .message-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 2px solid #00a000;
+        }
+
+        .message-sender {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .message-date {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-top: 2px;
+        }
+
+        .message-text {
+            color: #34495e;
+            line-height: 1.5;
+        }
+
+        .no-messages {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
         }
 
         /* Ícone de voltar */
         .voltar {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            font-size: 1.8rem;
+            top: 12px;
+            left: 12px;
+            font-size: 1.6rem;
             color: #333;
             cursor: pointer;
             transition: all 0.3s ease;
             background-color: rgba(255, 255, 255, 0.7);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -409,69 +643,95 @@
         /* Responsividade */
         @media (max-width: 768px) {
             .title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .message-box {
-                padding: 30px;
+                padding: 20px;
                 width: 85%;
             }
             
             .audio-player {
-                width: 250px;
+                width: 240px;
                 left: 10px;
                 bottom: 10px;
             }
             
             .album-cover {
-                width: 50px;
-                height: 50px;
+                width: 48px;
+                height: 48px;
             }
             
             .view-messages-btn {
                 right: 10px;
                 bottom: 10px;
                 padding: 12px 24px;
-                font-size: 14px;
+                font-size: 13px;
             }
             
             .voltar {
                 top: 10px;
                 left: 10px;
-                font-size: 1.5rem;
-                width: 36px;
-                height: 36px;
+                font-size: 1.4rem;
+                width: 32px;
+                height: 32px;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
             }
         }
 
         @media (max-width: 480px) {
             header {
-                height: 25vh; /* Ajustado para caber melhor em telas pequenas */
+                height: 22vh;
                 padding: 15px;
             }
             
             .title {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
             .message-box {
-                padding: 20px;
+                padding: 18px;
                 width: 90%;
-                margin: 15px auto;
+                margin: 12px auto;
             }
             
             .audio-player {
                 width: 90%;
                 left: 5%;
-                bottom: 80px;
+                bottom: 70px;
             }
             
             .view-messages-btn {
                 width: calc(90% - 40px);
                 right: 5%;
-                bottom: 20px;
-                text-align: center;
-                padding: 12px 20px;
+                bottom: 15px;
+                padding: 10px 18px;
+            }
+            
+            .photo-preview {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .avatar-options {
+                gap: 6px;
+            }
+            
+            .avatar-option {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .avatar-option i {
+                font-size: 14px;
+            }
+            
+            .music-controls {
+                gap: 5px;
             }
         }
     </style>
@@ -491,6 +751,27 @@
 <!-- Formulário de Mensagens -->
 <div class="message-box">
     <form id="messageForm">
+        <div class="photo-upload">
+            <img id="photoPreview" class="photo-preview" alt="Pré-visualização da foto">
+            <input type="file" id="photoInput" class="file-input" accept="image/*">
+            <label for="photoInput" class="upload-btn">Escolher Foto</label>
+            
+            <div class="avatar-options">
+                <div class="avatar-option selected" data-avatar="none">
+                    <div class="no-photo">Sem foto</div>
+                </div>
+                <div class="avatar-option" data-avatar="1">
+                    <i class="fas fa-user-friends"></i> <!-- Ícone de casal -->
+                </div>
+                <div class="avatar-option" data-avatar="2">
+                    <i class="fas fa-heart"></i> <!-- Ícone de coração -->
+                </div>
+                <div class="avatar-option" data-avatar="3">
+                    <i class="fas fa-ring"></i> <!-- Ícone de aliança -->
+                </div>
+            </div>
+        </div>
+        
         <div class="user-box">
             <input type="text" id="name" name="name" required>
             <label>Seu Nome</label>
@@ -513,28 +794,40 @@
     <div class="album-cover"></div>
     <div class="player-controls">
         <div class="song-info">
-            <div class="song-title">Música Especial</div>
-            <p class="artist">Camilly & Arthur</p>
+            <div class="song-title">Can't Help Falling In Love</div>
+            <p class="artist">Cello Version</p>
         </div>
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
-        <div class="buttons">
-            <button class="play-btn">
-                <svg viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="white" d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"></path>
+        <div class="music-controls">
+            <button class="prev-btn" title="Música anterior">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 6L9 12L15 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
-            <button class="pause-btn" style="display: none;">
-                <svg viewBox="0 0 16 16" class="bi bi-pause-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="white" d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"></path>
+            <div class="buttons">
+                <button class="play-btn" title="Reproduzir">
+                    <svg viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="white" d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"></path>
+                    </svg>
+                </button>
+                <button class="pause-btn" style="display: none;" title="Pausar">
+                    <svg viewBox="0 0 16 16" class="bi bi-pause-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="white" d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"></path>
+                    </svg>
+                </button>
+            </div>
+            <button class="next-btn" title="Próxima música">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 6L15 12L9 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
         </div>
     </div>
 </div>
 
-<!-- Botão para visualizar mensagens - NOVO ESTILO -->
+<!-- Botão para visualizar mensagens -->
 <button class="view-messages-btn" id="viewMessagesBtn">
     <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
         <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
@@ -546,14 +839,52 @@
     </svg>
 </button>
 
+<!-- Modal de Visualização de Mensagens -->
+<div class="modal" id="messagesModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Mensagens Recebidas</h2>
+            <button class="close-modal" id="closeModal">&times;</button>
+        </div>
+        <div class="message-list" id="messageList">
+            <!-- Mensagens serão inseridas aqui via JavaScript -->
+        </div>
+    </div>
+</div>
+
 <!-- Áudio (invisível) -->
 <audio id="backgroundMusic">
-    <source src="musica1.mp3" type="audio/mp3">
-    <source src="musica2.mp3" type="audio/mp3">
-    <source src="musica3.mp3" type="audio/mp3">
+    <source src="Can't Help Falling In Love - Cello .mp3" type="audio/mp3">
+    <source src="Sorriso Resplandecente - Dragon Ball GT _ Piano e Teclado Tutorial _ PiaNostalgia.mp3" type="audio/mp3">
+    <source src="John Legend - All of Me (Piano_Cello Cover) - Brooklyn Duo.mp3" type="audio/mp3">
 </audio>
 
 <script>
+    // Variáveis globais para armazenar a foto/avatar selecionada
+    let selectedAvatar = 'none';
+    let uploadedPhoto = null;
+    let currentSongIndex = 0;
+    const audio = document.getElementById('backgroundMusic');
+    
+    // Lista de músicas com os nomes fornecidos
+    const songs = [
+        {
+            src: "Can't Help Falling In Love - Cello .mp3",
+            title: "Can't Help Falling In Love",
+            artist: "Cello Version"
+        },
+        {
+            src: "Sorriso Resplandecente - Dragon Ball GT _ Piano e Teclado Tutorial _ PiaNostalgia.mp3",
+            title: "Sorriso Resplandecente",
+            artist: "Dragon Ball GT Piano"
+        },
+        {
+            src: "John Legend - All of Me (Piano_Cello Cover) - Brooklyn Duo.mp3",
+            title: "All of Me",
+            artist: "John Legend Cover"
+        }
+    ];
+
     // Efeito de carregamento da página
     window.addEventListener('load', function() {
         document.body.classList.add('loaded');
@@ -563,6 +894,12 @@
         
         // Inicializa o player de música
         initMusicPlayer();
+        
+        // Configura os eventos de foto/avatar
+        setupPhotoUpload();
+        
+        // Configura o modal de mensagens
+        setupMessagesModal();
     });
 
     // Cria pétalas de flores caindo
@@ -612,21 +949,28 @@
 
     // Player de música
     function initMusicPlayer() {
-        const audio = document.getElementById('backgroundMusic');
         const playBtn = document.querySelector('.play-btn');
         const pauseBtn = document.querySelector('.pause-btn');
         const progressBar = document.querySelector('.progress');
-        const songTitles = ["Nossa Canção", "Música do Amor", "Melodia Especial"];
-        const songArtists = ["Camilly & Arthur", "Para o Casal", "Momento Único"];
-        let currentSongIndex = 0;
-        
-        // Lista de músicas (substitua pelos seus arquivos)
-        const songs = ['musica1.mp3', 'musica2.mp3', 'musica3.mp3'];
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
         
         // Atualiza a informação da música
         function updateSongInfo() {
-            document.querySelector('.song-title').textContent = songTitles[currentSongIndex];
-            document.querySelector('.artist').textContent = songArtists[currentSongIndex];
+            const currentSong = songs[currentSongIndex];
+            document.querySelector('.song-title').textContent = currentSong.title;
+            document.querySelector('.artist').textContent = currentSong.artist;
+            audio.src = currentSong.src;
+            
+            // Carrega a música
+            audio.load();
+            
+            // Se a música estava tocando, continua tocando a nova
+            if (pauseBtn.style.display === 'block') {
+                audio.play().catch(error => {
+                    console.log("Reprodução automática bloqueada:", error);
+                });
+            }
         }
         
         // Atualiza a barra de progresso
@@ -635,16 +979,28 @@
             progressBar.style.width = `${progress}%`;
             
             // Se a música acabou, vai para a próxima
-            if (audio.currentTime >= audio.duration - 0.1) {
+            if (audio.currentTime >= audio.duration - 0.1 && !isNaN(audio.duration)) {
                 nextSong();
             }
         });
         
+        // Quando a música é carregada
+        audio.addEventListener('loadedmetadata', function() {
+            progressBar.style.width = '0%';
+        });
+        
         // Botão play
         playBtn.addEventListener('click', function() {
-            audio.play();
-            playBtn.style.display = 'none';
-            pauseBtn.style.display = 'block';
+            audio.play()
+                .then(() => {
+                    playBtn.style.display = 'none';
+                    pauseBtn.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error("Erro ao reproduzir música:", error);
+                    // Mostra mensagem para o usuário interagir
+                    alert("Por favor, clique em 'Reproduzir' novamente para ouvir a música.");
+                });
         });
         
         // Botão pause
@@ -657,21 +1013,168 @@
         // Próxima música
         function nextSong() {
             currentSongIndex = (currentSongIndex + 1) % songs.length;
-            audio.src = songs[currentSongIndex];
             updateSongInfo();
-            audio.play();
-            playBtn.style.display = 'none';
-            pauseBtn.style.display = 'block';
         }
         
+        // Música anterior
+        function prevSong() {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            updateSongInfo();
+        }
+        
+        // Botão próxima música
+        nextBtn.addEventListener('click', nextSong);
+        
+        // Botão música anterior
+        prevBtn.addEventListener('click', prevSong);
+        
         // Inicia a primeira música
-        audio.src = songs[0];
         updateSongInfo();
         
         // Clique na barra de progresso para avançar/retroceder
         document.querySelector('.progress-bar').addEventListener('click', function(e) {
-            const percent = e.offsetX / this.offsetWidth;
-            audio.currentTime = percent * audio.duration;
+            if (!isNaN(audio.duration)) {
+                const percent = e.offsetX / this.offsetWidth;
+                audio.currentTime = percent * audio.duration;
+            }
+        });
+
+        // Configura o evento para permitir reprodução após interação do usuário
+        document.addEventListener('click', function enableAudio() {
+            // Configura volume padrão
+            audio.volume = 0.7;
+        }, { once: true });
+    }
+
+    // Configura o upload de foto e seleção de avatar
+    function setupPhotoUpload() {
+        const photoInput = document.getElementById('photoInput');
+        const photoPreview = document.getElementById('photoPreview');
+        const avatarOptions = document.querySelectorAll('.avatar-option');
+
+        // Manipula a seleção de arquivo
+        photoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    photoPreview.src = event.target.result;
+                    photoPreview.style.display = 'block';
+                    uploadedPhoto = event.target.result;
+                    
+                    // Desmarca qualquer avatar selecionado
+                    avatarOptions.forEach(option => {
+                        option.classList.remove('selected');
+                        if (option.dataset.avatar === 'none') {
+                            option.classList.add('selected');
+                        }
+                    });
+                    selectedAvatar = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Manipula a seleção de avatares
+        avatarOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                avatarOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedAvatar = this.dataset.avatar;
+                
+                // Esconde a foto enviada se selecionar um avatar
+                if (selectedAvatar !== 'none') {
+                    photoPreview.style.display = 'none';
+                    uploadedPhoto = null;
+                    photoInput.value = '';
+                }
+            });
+        });
+    }
+
+    // Configura o modal de mensagens
+    function setupMessagesModal() {
+        const modal = document.getElementById('messagesModal');
+        const viewBtn = document.getElementById('viewMessagesBtn');
+        const closeBtn = document.getElementById('closeModal');
+        const messageList = document.getElementById('messageList');
+
+        // Abre o modal
+        viewBtn.addEventListener('click', function() {
+            modal.classList.add('show');
+            loadMessagesIntoModal();
+        });
+
+        // Fecha o modal
+        closeBtn.addEventListener('click', function() {
+            modal.classList.remove('show');
+        });
+
+        // Fecha o modal ao clicar fora
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+    }
+
+    // Carrega as mensagens no modal
+    function loadMessagesIntoModal() {
+        const messageList = document.getElementById('messageList');
+        const messages = JSON.parse(localStorage.getItem('weddingMessages')) || [];
+        
+        if (messages.length === 0) {
+            messageList.innerHTML = '<div class="no-messages">Nenhuma mensagem encontrada. Seja o primeiro a enviar!</div>';
+            return;
+        }
+        
+        // Ordena mensagens pela data (mais recente primeiro)
+        messages.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        messageList.innerHTML = '';
+        
+        messages.forEach(msg => {
+            const messageDate = new Date(msg.date);
+            const formattedDate = messageDate.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            let avatarHTML;
+            if (msg.photo) {
+                if (msg.photo.startsWith('data:image/svg+xml')) {
+                    // Se for um ícone SVG (avatar selecionado)
+                    avatarHTML = `<img src="${msg.photo}" class="message-avatar" alt="Avatar">`;
+                } else {
+                    // Se for uma foto enviada
+                    avatarHTML = `<img src="${msg.photo}" class="message-avatar" alt="Foto do remetente">`;
+                }
+            } else {
+                // Avatar padrão (sem foto)
+                avatarHTML = `
+                    <div class="default-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                `;
+            }
+            
+            const messageItem = document.createElement('div');
+            messageItem.className = 'message-item';
+            messageItem.innerHTML = `
+                <div class="message-header">
+                    ${avatarHTML}
+                    <div>
+                        <div class="message-sender">${msg.name}</div>
+                        <div class="message-date">${formattedDate}</div>
+                    </div>
+                </div>
+                <div class="message-text">${msg.message.replace(/\n/g, '<br>')}</div>
+            `;
+            
+            messageList.appendChild(messageItem);
         });
     }
 
@@ -684,31 +1187,64 @@
         
         if (name && message) {
             const messages = JSON.parse(localStorage.getItem('weddingMessages')) || [];
+            
+            // Determina a foto/avatar a ser usada
+            let photo = null;
+            if (uploadedPhoto) {
+                photo = uploadedPhoto;
+            } else if (selectedAvatar !== 'none') {
+                // Para ícones Font Awesome, criamos um elemento SVG com o ícone
+                const iconClass = document.querySelector(`.avatar-option[data-avatar="${selectedAvatar}"] i`).className;
+                const color = '#00a000';
+                const size = 100;
+                
+                photo = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 24 24' fill='${color}'><path d='${getIconPath(iconClass)}'/></svg>`;
+            }
+            
             messages.push({
                 name: name,
                 message: message,
+                photo: photo,
                 date: new Date().toISOString()
             });
+            
             localStorage.setItem('weddingMessages', JSON.stringify(messages));
             
             // Limpa o formulário
             document.getElementById('name').value = '';
             document.getElementById('message').value = '';
+            document.getElementById('photoPreview').style.display = 'none';
+            document.getElementById('photoInput').value = '';
+            uploadedPhoto = null;
+            
+            // Seleciona "Sem foto" por padrão
+            document.querySelectorAll('.avatar-option').forEach(option => {
+                option.classList.remove('selected');
+                if (option.dataset.avatar === 'none') {
+                    option.classList.add('selected');
+                }
+            });
+            selectedAvatar = 'none';
             
             // Feedback para o usuário
             alert('Mensagem enviada com sucesso! Obrigado pelo carinho 💚');
         } else {
-            alert('Por favor, preencha todos os campos!');
+            alert('Por favor, preencha todos os campos obrigatórios!');
         }
     });
 
-    // Botão para visualizar mensagens
-    document.getElementById('viewMessagesBtn').addEventListener('click', function() {
-        // Aqui você pode redirecionar para uma página de visualização de mensagens
-        // ou mostrar as mensagens em um modal
-        alert('Esta funcionalidade irá mostrar todas as mensagens recebidas.');
-        // window.location.href = "visualizar-mensagens.html";
-    });
+    // Função auxiliar para obter o path do ícone (simplificado)
+    function getIconPath(iconClass) {
+        // Esta é uma versão simplificada - na prática, você precisaria de um mapeamento completo
+        if (iconClass.includes('fa-user-friends')) {
+            return 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75';
+        } else if (iconClass.includes('fa-heart')) {
+            return 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z';
+        } else if (iconClass.includes('fa-ring')) {
+            return 'M18 12a6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6zM3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m0 11.4.7.7m-12.1-.7-.7.7';
+        }
+        return '';
+    }
 </script>
 
 </body>

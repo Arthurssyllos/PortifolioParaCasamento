@@ -310,14 +310,11 @@
                 // Tratamento dos avatares
                 let avatarHTML;
                 if (msg.photo) {
-                    if (msg.photo.startsWith('data:image/svg+xml')) {
-                        // Avatar SVG (ícone convertido)
+                    if (msg.photo.startsWith('data:image/svg+xml') || msg.photo.startsWith('data:image')) {
+                        // Avatar SVG ou foto enviada
                         avatarHTML = `<img src="${msg.photo}" class="message-avatar" alt="Avatar">`;
-                    } else if (msg.photo.startsWith('data:image')) {
-                        // Foto enviada pelo usuário
-                        avatarHTML = `<img src="${msg.photo}" class="message-avatar" alt="Foto do remetente">`;
-                    } else if (msg.photo.startsWith('fas fa-') || msg.photo.startsWith('fab fa-')) {
-                        // Ícone Font Awesome direto (formato antigo)
+                    } else if (msg.photo.includes('fa-')) {
+                        // Ícone Font Awesome
                         avatarHTML = `
                             <div class="message-avatar">
                                 <i class="${msg.photo}"></i>

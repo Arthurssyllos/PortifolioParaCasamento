@@ -92,12 +92,12 @@
             color: #00ff00;
         }
 
-        /* Formulário de mensagens */
+        /* Formulário de mensagens - Ajustado para ficar mais para cima */
         .message-box {
             position: relative;
             width: 90%;
             max-width: 450px;
-            margin: 15px auto;
+            margin: 5px auto 15px auto; /* Ajuste na margem superior */
             padding: 25px;
             background: rgba(255, 255, 255, 0.9);
             box-sizing: border-box;
@@ -545,6 +545,9 @@
             padding-bottom: 15px;
             margin-bottom: 15px;
             border-bottom: 1px solid #00a000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .modal-title {
@@ -560,6 +563,8 @@
             cursor: pointer;
             color: #2c3e50;
             transition: color 0.3s ease;
+            position: static;
+            margin-left: 15px;
         }
 
         .close-modal:hover {
@@ -716,7 +721,7 @@
             .message-box {
                 padding: 18px;
                 width: 90%;
-                margin: 12px auto;
+                margin: 5px auto 12px auto;
             }
             
             .audio-player {
@@ -1223,12 +1228,9 @@
             if (uploadedPhoto) {
                 photo = uploadedPhoto;
             } else if (selectedAvatar !== 'none') {
-                // Para ícones Font Awesome, criamos um elemento SVG com o ícone
+                // Para ícones Font Awesome, usamos a classe diretamente
                 const iconClass = document.querySelector(`.avatar-option[data-avatar="${selectedAvatar}"] i`).className;
-                const color = '#00a000';
-                const size = 100;
-                
-                photo = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 24 24' fill='${color}'><path d='${getIconPath(iconClass)}'/></svg>`;
+                photo = iconClass; // Armazena a classe do ícone diretamente
             }
             
             messages.push({
@@ -1262,19 +1264,6 @@
             alert('Por favor, preencha todos os campos obrigatórios!');
         }
     });
-
-    // Função auxiliar para obter o path do ícone (simplificado)
-    function getIconPath(iconClass) {
-        // Esta é uma versão simplificada - na prática, você precisaria de um mapeamento completo
-        if (iconClass.includes('fa-user-friends')) {
-            return 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75';
-        } else if (iconClass.includes('fa-heart')) {
-            return 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z';
-        } else if (iconClass.includes('fa-ring')) {
-            return 'M18 12a6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6zM3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m0 11.4.7.7m-12.1-.7-.7.7';
-        }
-        return '';
-    }
 </script>
 
 </body>

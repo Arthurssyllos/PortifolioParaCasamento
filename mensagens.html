@@ -506,19 +506,20 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
             z-index: 1000;
-            overflow-y: auto;
+            overflow: hidden;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
         .modal.show {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 1;
         }
 
         .modal-content {
             background-color: #e3f9e5;
-            margin: 5% auto;
             padding: 20px;
             border-radius: 10px;
             width: 90%;
@@ -528,6 +529,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             transform: translateY(-20px);
             transition: transform 0.3s ease;
+            position: relative;
         }
 
         .modal.show .modal-content {
@@ -535,11 +537,13 @@
         }
 
         .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
+            position: sticky;
+            top: 0;
+            background-color: #e3f9e5;
+            z-index: 1;
+            padding-top: 0;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
             border-bottom: 1px solid #00a000;
         }
 
@@ -563,6 +567,9 @@
         }
 
         .message-list {
+            max-height: calc(70vh - 80px);
+            overflow-y: auto;
+            padding-bottom: 10px;
             display: grid;
             gap: 15px;
         }
@@ -587,11 +594,22 @@
             object-fit: cover;
             margin-right: 10px;
             border: 2px solid #00a000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e3f9e5;
+            flex-shrink: 0;
+        }
+
+        .message-avatar i {
+            font-size: 18px;
+            color: #00a000;
         }
 
         .message-sender {
             font-weight: bold;
             color: #2c3e50;
+            font-size: 16px;
         }
 
         .message-date {
@@ -603,12 +621,14 @@
         .message-text {
             color: #34495e;
             line-height: 1.5;
+            white-space: pre-line;
         }
 
         .no-messages {
             text-align: center;
             padding: 20px;
             color: #7f8c8d;
+            font-style: italic;
         }
 
         /* Ícone de voltar */
@@ -1097,7 +1117,6 @@
         const modal = document.getElementById('messagesModal');
         const viewBtn = document.getElementById('viewMessagesBtn');
         const closeBtn = document.getElementById('closeModal');
-        const messageList = document.getElementById('messageList');
 
         // Abre o modal
         viewBtn.addEventListener('click', function() {
@@ -1145,17 +1164,28 @@
             
             let avatarHTML;
             if (msg.photo) {
-                if (msg.photo.startsWith('data:image/svg+xml')) {
-                    // Se for um ícone SVG (avatar selecionado)
+                if (msg.photo.startsWith('data:image/svg+xml') || msg.photo.startsWith('data:image')) {
+                    // Se for um ícone SVG ou foto enviada
                     avatarHTML = `<img src="${msg.photo}" class="message-avatar" alt="Avatar">`;
+                } else if (msg.photo.startsWith('fas fa-') || msg.photo.startsWith('fab fa-')) {
+                    // Se for um ícone Font Awesome direto (formato antigo)
+                    avatarHTML = `
+                        <div class="message-avatar">
+                            <i class="${msg.photo}"></i>
+                        </div>
+                    `;
                 } else {
-                    // Se for uma foto enviada
-                    avatarHTML = `<img src="${msg.photo}" class="message-avatar" alt="Foto do remetente">`;
+                    // Formato não reconhecido - usa padrão
+                    avatarHTML = `
+                        <div class="message-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    `;
                 }
             } else {
                 // Avatar padrão (sem foto)
                 avatarHTML = `
-                    <div class="default-avatar">
+                    <div class="message-avatar">
                         <i class="fas fa-user"></i>
                     </div>
                 `;

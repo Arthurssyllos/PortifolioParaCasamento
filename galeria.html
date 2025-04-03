@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria - Camilly & Arthur</title>
+    <link rel="icon" href="favicon7.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos base */
+        body {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #e3f9e5;
+            min-height: 100vh;
+        }
+        
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* Animação das pétalas */
+        .petal {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            animation: falling linear infinite;
+        }
+
+        @keyframes falling {
+            0% {
+                transform: translate(0, -10vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(var(--random-x), 100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Cabeçalho */
+        header {
+            background-image: url('imagem-casal.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 25vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .title-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #00ff00;
+        }
+
+        /* Linha curva decorativa */
+        .title-underline {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            overflow: hidden;
+        }
+
+        .title-underline::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M0,5 C20,10 40,0 60,5 C80,10 100,0 100,5 L100,10 L0,10 Z' fill='%2300ff00'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+        }
+
+        /* Galeria Masonry */
+        .masonry-gallery {
+            columns: 3 300px;
+            column-gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8f8f8;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e0e0e0;
+            color: #777;
+            font-size: 0.9rem;
+            height: 100%;
+        }
+
+        /* Botão Voltar */
+        .voltar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.6rem;
+            color: #333;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .voltar:hover {
+            color: #00ff00;
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .masonry-gallery {
+                columns: 2;
+            }
+            .title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .masonry-gallery {
+                columns: 1;
+            }
+            .title {
+                font-size: 1.8rem;
+            }
+            header {
+                height: 20vh;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Pétalas -->
+<div id="petals-container"></div>
+
+<!-- Botão Voltar -->
+<a href="historia.html" class="voltar" aria-label="Voltar">←</a>
+
+<!-- Cabeçalho -->
+<header>
+    <div class="title-container">
+        <h1 class="title">Nossa <span class="highlight">Galeria</span> 🤍</h1>
+        <div class="title-underline"></div>
+    </div>
+</header>
+
+<!-- Galeria -->
+<div class="masonry-gallery">
+    <div class="gallery-item">
+        <div class="image-placeholder" style="height: 400px">[Primeiro Encontro]</div>
+    </div>
+    
+    <div class="gallery-item">
+        <div class="image-placeholder" style="height: 250px">[Pedido de Casamento]</div>
+    </div>
+    
+    <div class="gallery-item">
+        <div class="image-placeholder" style="height: 300px">[Festa de Noivado]</div>
+    </div>
+    
+    <div class="gallery-item">
+        <div class="image-placeholder" style="height: 350px">[Viagem Romântica]</div>
+    </div>
+    
+    <div class="gallery-item">
+        <div class="image-placeholder" style="height: 200px">[Preparativos]</div>
+    </div>
+    
+    <div class="gallery-item">
+        <div class="image-placeholder" style="height: 280px">[Momentos Especiais]</div>
+    </div>
+</div>
+
+<script>
+    // Carregamento da página
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+        createPetals();
+    });
+
+    // Criar pétalas
+    function createPetals() {
+        const container = document.getElementById('petals-container');
+        const colors = ['#00ff00', '#a0ffa0', '#e3f9e5'];
+        const shapes = ['M12 2L2 22', 'M5 2L15 22', 'M8 2L18 22'];
+
+        for(let i = 0; i < 15; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+            petal.style.animationDelay = Math.random() * 2 + 's';
+            petal.style.setProperty('--random-x', Math.random() * 40 - 20 + 'vw');
+            
+            petal.innerHTML = `
+                <svg viewBox="0 0 24 24" width="24" height="24"
+                     style="fill:${colors[i%3]}; transform: rotate(${Math.random() * 360}deg)">
+                    <path d="${shapes[i%3]}"/>
+                </svg>
+            `;
+
+            container.appendChild(petal);
+        }
+    }
+
+    // Para implementar com imagens reais:
+    /*
+    const images = [
+        { src: 'foto1.jpg', height: 400, alt: 'Primeiro Encontro' },
+        { src: 'foto2.jpg', height: 250, alt: 'Pedido de Casamento' },
+        // Adicione todas as imagens aqui
+    ];
+    
+    document.querySelectorAll('.gallery-item').forEach((item, index) => {
+        const imgData = images[index];
+        const img = document.createElement('img');
+        img.src = imgData.src;
+        img.alt = imgData.alt;
+        img.className = 'gallery-image';
+        img.style.height = imgData.height + 'px';
+        item.querySelector('.image-placeholder').replaceWith(img);
+    });
+    */
+</script>
+
+</body>
+</html>

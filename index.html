@@ -12,6 +12,7 @@
       font-family: 'Arial', sans-serif;
       box-sizing: border-box;
       background-color: #f5f5f5;
+      overflow-x: hidden;
     }
 
     header {
@@ -45,42 +46,58 @@
       position: relative;
       z-index: 2;
       color: white;
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     header h1 {
-      font-size: 4rem;
+      font-size: 3.5rem;
       margin: 0;
+      font-weight: normal;
+      letter-spacing: 2px;
     }
 
     header p {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       margin: 10px 0;
     }
 
     header .save-the-date {
       font-size: 1.5rem;
       font-style: italic;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      letter-spacing: 5px;
     }
 
+    /* Navigation - Desktop */
     nav {
       position: absolute;
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 20px;
-      font-size: 1.2rem;
-      z-index: 3;
+      gap: 15px;
+      font-size: 1rem;
+      z-index: 10;
+      width: 90%;
+      max-width: 800px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     nav a {
       text-decoration: none;
       color: white;
       border: 2px solid white;
-      padding: 10px 20px;
+      padding: 8px 15px;
       border-radius: 5px;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      display: inline-block;
+      background-color: transparent;
+      cursor: pointer;
     }
 
     nav a:hover {
@@ -91,35 +108,54 @@
     .quote {
       font-size: 1rem;
       font-style: italic;
-      margin-top: 20px;
+      margin: 30px 0;
+      line-height: 1.5;
     }
 
-    /* Menu Hamburguer */
+    /* Mobile Menu Button */
     .menu-icon {
       display: none;
       cursor: pointer;
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 4;
+      z-index: 100;
+      width: 30px;
+      height: 24px;
+      background: transparent;
+      border: none;
+      padding: 0;
     }
 
     .menu-icon div {
-      width: 35px;
-      height: 4px;
+      width: 100%;
+      height: 3px;
       background-color: white;
       margin: 6px 0;
-      transition: 0.4s;
+      transition: all 0.3s ease;
     }
 
-    /* Menu Responsivo */
+    /* Transform hamburger into X */
+    .menu-icon.open div:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .menu-icon.open div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-icon.open div:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* Mobile Menu */
     .menu-responsive {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color: rgba(0, 0, 0, 0.95);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -127,59 +163,54 @@
       text-align: center;
       transform: translateX(100%);
       opacity: 0;
-      transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-      z-index: 3;
-    }
-
-    .menu-responsive a {
-      text-decoration: none;
-      color: white;
-      font-size: 2rem;
-      margin: 20px 0;
-      padding: 10px;
-    }
-
-    .menu-responsive a:hover {
-      background: white;
-      color: #333;
-      padding: 10px 20px;
-      border-radius: 5px;
+      transition: all 0.4s ease-in-out;
+      z-index: 90;
+      pointer-events: none;
     }
 
     .menu-responsive.open {
       transform: translateX(0);
       opacity: 1;
+      pointer-events: auto;
     }
 
-    /* Botão de Fechar */
-    .menu-responsive .close-btn {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      font-size: 2rem;
-      background: transparent;
-      border: none;
+    .menu-responsive a {
+      text-decoration: none;
       color: white;
-      cursor: pointer;
-      z-index: 5;
+      font-size: 1.5rem;
+      margin: 15px 0;
+      padding: 12px 24px;
+      border: 2px solid white;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 300px;
+      transition: all 0.3s ease;
+      background-color: transparent;
+      pointer-events: auto;
     }
 
-    /* Estilo para o botão adaptado */
+    .menu-responsive a:hover {
+      background: white;
+      color: #333;
+    }
+
+    /* Presence Button */
     .presence-button {
-      padding: 10px 20px;
+      padding: 12px 30px;
       text-transform: uppercase;
       border-radius: 8px;
-      font-size: 17px;
+      font-size: 1rem;
       font-weight: 500;
-      color: #ffffff80;
+      color: #ffffff;
       text-shadow: none;
       background: transparent;
       cursor: pointer;
-      border: 1px solid #ffffff80;
-      transition: background 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+      border: 1px solid #ffffff;
+      transition: all 0.5s ease;
       user-select: none;
       position: relative;
-      margin-top: 40px;
+      margin-top: 20px;
+      letter-spacing: 1px;
     }
 
     .presence-button:hover,
@@ -191,7 +222,7 @@
       box-shadow: 0 0 5px #00ff00, 0 0 20px #00ff00, 0 0 50px #00ff00, 0 0 100px #00ff00;
     }
 
-    /* Responsividade */
+    /* Responsiveness */
     @media (max-width: 768px) {
       nav {
         display: none;
@@ -202,27 +233,38 @@
       }
 
       header h1 {
-        font-size: 3rem;
-      }
-
-      .presence-button {
-        font-size: 1rem;
-        padding: 10px 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header h1 {
         font-size: 2.5rem;
+      }
+
+      header p {
+        font-size: 1.2rem;
       }
 
       .save-the-date {
         font-size: 1.2rem;
       }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .save-the-date {
+        font-size: 1rem;
+      }
+
+      .quote {
+        font-size: 0.9rem;
+      }
 
       .presence-button {
+        padding: 10px 20px;
         font-size: 0.9rem;
-        padding: 8px 16px;
       }
     }
   </style>
@@ -230,29 +272,32 @@
 <body>
 
 <header>
-  <div class="menu-icon" onclick="toggleMenu()">
+  <!-- Mobile Menu Button -->
+  <button class="menu-icon" onclick="toggleMenu()" aria-label="Abrir menu">
     <div></div>
     <div></div>
     <div></div>
-  </div>
+  </button>
   
+  <!-- Desktop Navigation -->
   <nav>
     <a href="confirmacao.html">Confirmar Presença</a>
-    <a href="listaPresentes.html">Lista de Presentes</a> <!-- Link atualizado -->
+    <a href="listaPresentes.html">Lista de Presentes</a>
     <a href="Evento.html">O Evento</a>
     <a href="historia.html">História do Casal</a>
     <a href="ajuda.html">Ajuda</a>
   </nav>
   
+  <!-- Mobile Menu -->
   <div class="menu-responsive" id="menuResponsive">
     <a href="confirmacao.html">Confirmar Presença</a>
-    <a href="listaPresentes.html">Lista de Presentes</a> <!-- Link atualizado -->
+    <a href="listaPresentes.html">Lista de Presentes</a>
     <a href="Evento.html">O Evento</a>
     <a href="historia.html">História do Casal</a>
     <a href="ajuda.html">Ajuda</a>
-    <button class="close-btn" onclick="toggleMenu()">X</button>
   </div>
 
+  <!-- Main Content -->
   <div>
     <div class="save-the-date">Save the date</div>
     <h1>Camilly & Arthur</h1>
@@ -263,18 +308,38 @@
 </header>
 
 <script>
+  // Toggle mobile menu
   function toggleMenu() {
     const menu = document.getElementById('menuResponsive');
+    const icon = document.querySelector('.menu-icon');
+    
     menu.classList.toggle('open');
+    icon.classList.toggle('open');
+    
+    // Lock/unlock page scroll
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
   }
 
-  // Fecha o menu ao clicar fora dele
-  window.onclick = function(event) {
+  // Close menu when clicking a link
+  document.querySelectorAll('.menu-responsive a').forEach(link => {
+    link.addEventListener('click', toggleMenu);
+  });
+
+  // Reset menu on desktop view
+  function checkScreenSize() {
     const menu = document.getElementById('menuResponsive');
-    if (!event.target.closest('.menu-icon') && !event.target.closest('#menuResponsive')) {
+    const icon = document.querySelector('.menu-icon');
+    
+    if (window.innerWidth > 768) {
       menu.classList.remove('open');
+      icon.classList.remove('open');
+      document.body.style.overflow = '';
     }
   }
+
+  // Check on load and resize
+  window.addEventListener('load', checkScreenSize);
+  window.addEventListener('resize', checkScreenSize);
 </script>
 
 </body>

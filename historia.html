@@ -6,8 +6,9 @@
     <title>História de Camilly & Arthur</title>
     <link rel="icon" href="favicon4.png" type="image/png">
     
-    <!-- Incluindo o Bootstrap -->
+    <!-- Bootstrap e Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
         /* Efeito de pré-carregamento e animação de entrada */
@@ -71,6 +72,7 @@
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease-out 0.5s, transform 1s ease-out 0.5s;
+            position: relative;
         }
         
         body.loaded header {
@@ -94,29 +96,38 @@
             font-size: 3.5rem;
         }
 
-        .written {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-            text-align: center;
-            line-height: 1.5;
-            margin: 20px auto;
+        /* Card para a frase bíblica */
+        .bible-card {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 20px;
             max-width: 800px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-left: 5px solid #00ff00;
-            border-radius: 10px;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             opacity: 0;
             transform: scale(0.95);
             transition: opacity 1s ease-out 1s, transform 1s ease-out 1s;
         }
         
-        body.loaded .written {
+        body.loaded .bible-card {
             opacity: 1;
             transform: scale(1);
         }
 
+        .written {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            line-height: 1.5;
+            margin: 0;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Subtítulo melhorado - COM MAIS SOMBRA */
         .subtitle {
             font-size: 1.8rem;
             margin-top: 20px;
@@ -125,6 +136,9 @@
             position: relative;
             display: inline-block;
             padding: 0 40px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-shadow: 0 0 8px rgba(0,0,0,0.6);
         }
         
         body.loaded .subtitle {
@@ -132,17 +146,13 @@
         }
 
         .highlight-text {
-            font-family: 'Arial', sans-serif;
-            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
             font-style: italic;
             color: #fff;
-            text-shadow: 
-                0 0 5px rgba(255, 255, 255, 0.3),
-                0 0 10px rgba(0, 255, 0, 0.2);
             letter-spacing: 1px;
             position: relative;
             display: inline-block;
-            text-transform: uppercase;
         }
 
         .highlight-text::after {
@@ -152,15 +162,15 @@
             left: 0;
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.5), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
             animation: underline-grow 2s ease-out forwards;
         }
 
         .quote-mark {
             position: absolute;
             font-size: 3.5rem;
-            color: rgba(0, 255, 0, 0.3);
-            opacity: 0.5;
+            color: rgba(255, 255, 255, 0.5);
+            opacity: 0.7;
             top: 50%;
             transform: translateY(-50%);
             font-family: 'Times New Roman', serif;
@@ -176,8 +186,8 @@
         }
 
         .subtitle:hover .quote-mark {
-            opacity: 0.8;
-            color: rgba(0, 255, 0, 0.5);
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         @keyframes underline-grow {
@@ -191,15 +201,63 @@
             }
         }
 
+        /* Botão de voltar fixo - NÃO ACOMPANHA SCROLL */
+        .btn-voltar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-voltar:hover {
+            background-color: rgba(255, 255, 255, 0.95);
+            transform: scale(1.05);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-voltar i {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        /* Card do carrossel - MAIOR LARGURA */
+        .carousel-card {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 1100px;
+            margin: 40px auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: visible;
+        }
+
+        /* NOVO CARROSSEL COM 3 FOTOS E DESTAQUE NO CENTRO */
         .carousel-container {
             position: relative;
             width: 100%;
             max-width: 100%;
-            margin: 40px auto;
+            margin: 0 auto;
             overflow: hidden;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease-out 1.2s, transform 1s ease-out 1.2s;
+            border-radius: 10px;
+            height: 500px;
         }
         
         body.loaded .carousel-container {
@@ -210,45 +268,77 @@
         .carousel-slide {
             display: flex;
             transition: transform 0.5s ease-in-out;
+            height: 100%;
+            align-items: center;
         }
 
         .carousel-image {
-            width: 100%;
-            transition: transform 0.5s ease-in-out;
-            transform: scale(0.85);
+            flex: 0 0 33.333%;
+            transition: all 0.5s ease-in-out;
+            padding: 0 10px;
+            text-align: center;
+            height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .carousel-slide .active {
-            transform: scale(1.2);
-        }
-
-        .carousel-slide img {
+        .carousel-image img {
             width: 100%;
+            height: 100%;
             object-fit: cover;
+            border-radius: 8px;
+            transition: all 0.5s ease-in-out;
         }
 
+        .carousel-image.center img {
+            transform: scale(1.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .carousel-image.side img {
+            transform: scale(0.9);
+            opacity: 0.8;
+            filter: brightness(0.8);
+        }
+
+        /* Setas modernas e posicionadas parcialmente dentro/fora */
         .carousel-button {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: transparent;
             color: white;
-            padding: 10px;
             border: none;
             cursor: pointer;
-            font-size: 2rem;
-            z-index: 1;
+            font-size: 2.5rem;
+            z-index: 3;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0.8;
+        }
+
+        .carousel-button:hover {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
         }
 
         .prev {
-            left: 10px;
+            left: -15px;
         }
 
         .next {
-            right: 10px;
+            right: -15px;
         }
 
-        /* Seção da História */
+        /* Seção da História - FONTE PADRÃO */
         .story-section {
             background-color: #f9f9f9;
             padding: 40px 20px;
@@ -260,40 +350,12 @@
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease-out 1.5s, transform 1s ease-out 1.5s;
+            font-family: 'Arial', sans-serif;
         }
         
         body.loaded .story-section {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        /* Ícone de voltar PERFEITAMENTE centralizado */
-        .voltar {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            font-size: 1.8rem;
-            color: #333;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: rgba(249, 249, 249, 0.7);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 10;
-            line-height: 1;
-            padding: 0;
-            margin: 0;
-        }
-
-        .voltar:hover {
-            color: #00ff00;
-            background-color: rgba(249, 249, 249, 0.9);
-            transform: scale(1.1);
         }
 
         .story-section h2 {
@@ -400,6 +462,19 @@
             transform: scale(0.95);
         }
 
+        /* Ajustes de responsividade */
+        @media (max-width: 1200px) {
+            .carousel-card {
+                max-width: 95%;
+            }
+            .prev {
+                left: -10px;
+            }
+            .next {
+                right: -10px;
+            }
+        }
+
         @media (max-width: 768px) {
             .title {
                 font-size: 2.5rem;
@@ -421,20 +496,20 @@
                 font-size: 1rem;
             }
             .carousel-button {
-                font-size: 1.5rem;
+                font-size: 2rem;
+                width: 50px;
+                height: 50px;
             }
-            .voltar {
-                top: 10px;
-                left: 10px;
-                font-size: 1.5rem;
-                width: 36px;
-                height: 36px;
+            .btn-voltar {
+                width: 45px;
+                height: 45px;
+            }
+            .btn-voltar i {
+                font-size: 1.3rem;
             }
             .story-section h2 {
                 font-size: 2rem;
                 padding-top: 15px;
-                margin-left: 20px;
-                margin-right: 20px;
             }
             .story-section p {
                 font-size: 1rem;
@@ -445,6 +520,23 @@
             .cta:before {
                 width: 40px;
                 height: 40px;
+            }
+            .bible-card {
+                padding: 20px;
+                margin: 15px auto;
+            }
+            .carousel-card {
+                padding: 20px;
+                max-width: 95%;
+            }
+            .carousel-container {
+                height: 400px;
+            }
+            .prev {
+                left: -8px;
+            }
+            .next {
+                right: -8px;
             }
         }
 
@@ -462,65 +554,101 @@
             .quote-mark {
                 font-size: 2.5rem;
             }
-            .voltar {
-                top: 8px;
-                left: 8px;
-                font-size: 1.3rem;
-                width: 32px;
-                height: 32px;
+            .btn-voltar {
+                width: 40px;
+                height: 40px;
+                top: 15px;
+                left: 15px;
+            }
+            .btn-voltar i {
+                font-size: 1.1rem;
             }
             .story-section h2 {
                 font-size: 1.8rem;
                 padding-top: 10px;
             }
+            .bible-card {
+                padding: 15px;
+                margin: 10px auto;
+            }
+            .carousel-card {
+                padding: 15px;
+                max-width: 95%;
+            }
+            .carousel-button {
+                width: 45px;
+                height: 45px;
+                font-size: 1.8rem;
+            }
+            .carousel-container {
+                height: 300px;
+            }
+            .prev {
+                left: -5px;
+            }
+            .next {
+                right: -5px;
+            }
         }
     </style>
+    
+    <!-- Google Fonts - Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!-- Pétalas de flores serão adicionadas via JavaScript -->
 <div id="petals-container"></div>
 
+<!-- Botão de voltar fixo no topo - NÃO ACOMPANHA SCROLL -->
+<a href="index.html" class="btn-voltar" aria-label="Voltar">
+    <i class="fas fa-arrow-left"></i>
+</a>
+
 <header>
     <h1 class="title">A História de <span class="highlight">Camilly & Arthur</span></h1>
     <p class="subtitle">
         <span class="quote-mark left">“</span>
-        <span class="highlight-text">Como o destino os uniu..</span>
+        <span class="highlight-text">Um amor escrito nas estrelas</span>
         <span class="quote-mark right">”</span>
     </p>
-    <h2 class="written">"Deus mudou o teu caminho até juntares com o meu e guardou a tua vida separando-a para mim. Para onde fores, irei. Onde tu repousares, repousarei. Teu Deus será o meu Deus. Teu caminho o meu será. 💚"</h2>
+    
+    <div class="bible-card">
+        <h2 class="written">"Deus mudou o teu caminho até juntares com o meu e guardou a tua vida separando-a para mim. Para onde fores, irei. Onde tu repousares, repousarei. Teu Deus será o meu Deus. Teu caminho o meu será. 💚"</h2>
+    </div>
 </header>
 
-<!-- Carrossel de Imagens -->
-<div class="carousel-container">
-    <div class="carousel-slide">
-        <div class="carousel-image" id="image1">
-            <img src="imagem1.jpeg" alt="Foto 1">
+<!-- Card do carrossel - MAIOR LARGURA -->
+<div class="carousel-card">
+    <!-- Carrossel de Imagens -->
+    <div class="carousel-container">
+        <div class="carousel-slide">
+            <div class="carousel-image side" id="image1">
+                <img src="imagem1.jpeg" alt="Foto 1">
+            </div>
+            <div class="carousel-image center" id="image2">
+                <img src="imagem2.jpeg" alt="Foto 2">
+            </div>
+            <div class="carousel-image side" id="image3">
+                <img src="imagem3.jpeg" alt="Foto 3">
+            </div>
         </div>
-        <div class="carousel-image active" id="image2">
-            <img src="imagem2.jpeg" alt="Foto 2">
-        </div>
-        <div class="carousel-image" id="image3">
-            <img src="imagem3.jpeg" alt="Foto 3">
-        </div>
+        <button class="carousel-button prev" onclick="moveSlide(-1)">←</button>
+        <button class="carousel-button next" onclick="moveSlide(1)">→</button>
     </div>
-    <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
-    <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
 </div>
 
 <!-- Seção da História -->
 <section class="story-section">
-    <a href="index.html" class="voltar" aria-label="Voltar">←</a>
-    
     <h2>💚 Nossa História 💚</h2>
     <p>
-        Camilly e Arthur se encontraram pela primeira vez em agosto de 2022, em uma ocasião inesperada que parecia ter sido cuidadosamente orquestrada pelo destino. Foi após um culto da mocidade, durante um simples lanche noturno, que tudo começou. Enquanto a noite chegava ao fim e as despedidas se aproximavam, Arthur reuniu coragem para ir até Camilly e iniciar uma conversa que mudaria suas vidas para sempre. Um gesto singelo, um pedido de contato, e uma nova jornada se iniciou. Desde aquele momento, algo profundo começou a florescer entre eles. As primeiras conversas revelaram muito mais do que interesses comuns; mostraram sonhos semelhantes, valores compartilhados e um desejo sincero de construir um futuro lado a lado. A amizade que nasceu ali se tornou a base de um amor que cresceu com intensidade e ternura.
+        Camilly e Arthur se encontraram pela primeira vez em agosto de 2022, em uma ocasião inesperada que claramente foi cuidadosamente orquestrada por Deus. Foi após um culto da mocidade, durante um simples lanche noturno, que tudo começou. Enquanto a noite chegava ao fim e as despedidas se aproximavam, Arthur reuniu coragem para ir até Camilly e iniciar uma conversa que mudaria suas vidas para sempre. Um gesto singelo, um pedido de contato, e uma nova jornada se iniciou. Desde aquele momento, algo profundo começou a florescer entre eles. As primeiras conversas revelaram muito mais do que interesses comuns; mostraram sonhos semelhantes, valores compartilhados e um desejo sincero de construir um futuro lado a lado. A amizade que nasceu ali se tornou a base de um amor que cresceu com intensidade e ternura.
     </p>
     <p>
         Em 17 de dezembro de 2022, esse laço se transformou em namoro, um capítulo cheio de risos, cumplicidade e descobertas. Cada dia era uma prova de que o que sentiam era verdadeiro e profundo. O amor, assim como uma chama suave e constante, iluminava suas vidas e os guiava em cada passo. No dia 22 de dezembro de 2023, um ano e alguns dias depois, Arthur fez o pedido mais importante de sua vida: convidou Camilly para ser sua companheira para sempre. A resposta foi um sim repleto de emoção e promessas silenciosas de um futuro repleto de aventuras, carinho e fé.
     </p>
     <p>
-        Hoje, Camilly e Arthur estão prestes a iniciar uma nova fase, prontos para celebrar essa história que é tão autêntica quanto o encontro inesperado que os uniu. Com o coração transbordando de amor e a certeza de que cada desafio e conquista os trouxeram até aqui, eles olham para frente, prontos para construir uma vida juntos. E assim, como no primeiro encontro, confiam que o destino continuará guiando seus passos em direção a um futuro brilhante, cheio de bênçãos e felicidade.
+        Hoje, Camilly e Arthur estão prestes a iniciar uma nova fase, prontos para celebrar essa história que é tão autêntica quanto o encontro inesperado que Deus preparou para uní-los. Com o coração transbordando de amor e a certeza de que cada desafio e conquista os trouxeram até aqui, eles olham para frente, prontos para construir uma vida juntos. E assim, como no primeiro encontro, confiam que Deus continuará guiando seus passos em direção a um futuro brilhante, cheio de bênçãos e felicidade.
     </p>
 </section>
 
@@ -544,19 +672,29 @@
         createPetals();
     });
 
-    // Carrossel de imagens
-    let currentSlide = 0;
-
+    // Carrossel de imagens - NOVA LÓGICA
+    let currentSlide = 1; // Começa com a imagem do meio como ativa
+    
     function moveSlide(step) {
         const images = document.querySelectorAll('.carousel-image');
-        currentSlide = (currentSlide + step + images.length) % images.length;
-        images.forEach((image, index) => {
-            image.classList.remove('active');
-            if (index === currentSlide) {
-                image.classList.add('active');
-            }
+        const totalImages = images.length;
+        
+        // Remove classes atuais
+        images.forEach(img => {
+            img.classList.remove('center', 'side');
         });
+        
+        // Atualiza o slide atual
+        currentSlide = (currentSlide + step + totalImages) % totalImages;
+        
+        // Define as classes dos slides
+        images[(currentSlide - 1 + totalImages) % totalImages].classList.add('side');
+        images[currentSlide].classList.add('center');
+        images[(currentSlide + 1) % totalImages].classList.add('side');
     }
+
+    // Inicializa o carrossel
+    moveSlide(0);
 
     // Cria pétalas de flores caindo
     function createPetals() {

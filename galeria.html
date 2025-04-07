@@ -127,16 +127,7 @@
             width: 100%;
             height: auto;
             display: block;
-        }
-
-        .image-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #e0e0e0;
-            color: #777;
-            font-size: 0.9rem;
-            height: 100%;
+            object-fit: cover;
         }
 
         /* Botão Voltar */
@@ -206,29 +197,13 @@
 
 <!-- Galeria -->
 <div class="masonry-gallery">
-    <div class="gallery-item">
-        <div class="image-placeholder" style="height: 400px">[Primeiro Encontro]</div>
-    </div>
-    
-    <div class="gallery-item">
-        <div class="image-placeholder" style="height: 250px">[Pedido de Casamento]</div>
-    </div>
-    
-    <div class="gallery-item">
-        <div class="image-placeholder" style="height: 300px">[Festa de Noivado]</div>
-    </div>
-    
-    <div class="gallery-item">
-        <div class="image-placeholder" style="height: 350px">[Viagem Romântica]</div>
-    </div>
-    
-    <div class="gallery-item">
-        <div class="image-placeholder" style="height: 200px">[Preparativos]</div>
-    </div>
-    
-    <div class="gallery-item">
-        <div class="image-placeholder" style="height: 280px">[Momentos Especiais]</div>
-    </div>
+    <!-- Itens serão preenchidos pelo JavaScript -->
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
 </div>
 
 <script>
@@ -236,6 +211,7 @@
     window.addEventListener('load', () => {
         document.body.classList.add('loaded');
         createPetals();
+        loadImages();
     });
 
     // Criar pétalas
@@ -264,24 +240,26 @@
         }
     }
 
-    // Para implementar com imagens reais:
-    /*
-    const images = [
-        { src: 'foto1.jpg', height: 400, alt: 'Primeiro Encontro' },
-        { src: 'foto2.jpg', height: 250, alt: 'Pedido de Casamento' },
-        // Adicione todas as imagens aqui
-    ];
-    
-    document.querySelectorAll('.gallery-item').forEach((item, index) => {
-        const imgData = images[index];
-        const img = document.createElement('img');
-        img.src = imgData.src;
-        img.alt = imgData.alt;
-        img.className = 'gallery-image';
-        img.style.height = imgData.height + 'px';
-        item.querySelector('.image-placeholder').replaceWith(img);
-    });
-    */
+    // Carregar imagens na galeria
+    function loadImages() {
+        const images = [
+            { src: 'Previa 4.jpg', alt: 'Primeiro Encontro' },
+            { src: 'Previa 6.jpg', alt: 'Pedido de Casamento' },
+            { src: 'Previa 7.jpg', alt: 'Festa de Noivado' },
+            { src: 'Previa 10.jpg', alt: 'Viagem Romântica' },
+            { src: 'Previa 11.jpg', alt: 'Preparativos' },
+            { src: 'Previa 17.jpg', alt: 'Momentos Especiais' }
+        ];
+        
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            const imgData = images[index];
+            const img = document.createElement('img');
+            img.src = imgData.src;
+            img.alt = imgData.alt;
+            img.className = 'gallery-image';
+            item.appendChild(img);
+        });
+    }
 </script>
 
 </body>

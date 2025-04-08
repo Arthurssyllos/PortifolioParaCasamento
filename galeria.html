@@ -81,7 +81,6 @@
             color: #00ff00;
         }
 
-        /* Linha curva decorativa */
         .title-underline {
             position: absolute;
             bottom: -10px;
@@ -115,12 +114,37 @@
             border-radius: 8px;
             overflow: hidden;
             background: #f8f8f8;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            box-shadow: 
+                0 2px 8px rgba(0,0,0,0.1),
+                0 0 12px rgba(0, 255, 0, 0.05);
         }
 
         .gallery-item:hover {
             transform: scale(1.02);
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.1),
+                0 0 20px rgba(0, 255, 0, 0.15);
+        }
+
+        /* Efeito de brilho neon */
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 255, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
         }
 
         .gallery-image {
@@ -128,6 +152,8 @@
             height: auto;
             display: block;
             object-fit: cover;
+            position: relative;
+            z-index: 1;
         }
 
         /* Botão Voltar */
@@ -196,14 +222,8 @@
 </header>
 
 <!-- Galeria -->
-<div class="masonry-gallery">
-    <!-- Itens serão preenchidos pelo JavaScript -->
-    <div class="gallery-item"></div>
-    <div class="gallery-item"></div>
-    <div class="gallery-item"></div>
-    <div class="gallery-item"></div>
-    <div class="gallery-item"></div>
-    <div class="gallery-item"></div>
+<div class="masonry-gallery" id="gallery-container">
+    <!-- Itens serão gerados pelo JavaScript -->
 </div>
 
 <script>
@@ -248,16 +268,28 @@
             { src: 'Previa 7.jpg', alt: 'Festa de Noivado' },
             { src: 'Previa 10.jpg', alt: 'Viagem Romântica' },
             { src: 'Previa 11.jpg', alt: 'Preparativos' },
-            { src: 'Previa 17.jpg', alt: 'Momentos Especiais' }
+            { src: 'Previa 17.jpg', alt: 'Momentos Especiais' },
+            { src: 'Previa 18.jpg', alt: 'Ensaio Fotográfico' },
+            { src: 'Previa 19.jpg', alt: 'Decoracões' },
+            { src: 'Previa 20.jpg', alt: 'Detalhes' },
+            { src: 'Previa 21.jpg', alt: 'Celebração' },
+            { src: 'Previa 22.jpg', alt: 'Amigos & Família' }, <!-- Nova -->
+            { src: 'Previa 23.jpg', alt: 'Lembranças' } <!-- Nova -->
         ];
+
+        const galleryContainer = document.getElementById('gallery-container');
         
-        document.querySelectorAll('.gallery-item').forEach((item, index) => {
-            const imgData = images[index];
+        images.forEach((imgData) => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            
             const img = document.createElement('img');
             img.src = imgData.src;
             img.alt = imgData.alt;
             img.className = 'gallery-image';
+            
             item.appendChild(img);
+            galleryContainer.appendChild(item);
         });
     }
 </script>
